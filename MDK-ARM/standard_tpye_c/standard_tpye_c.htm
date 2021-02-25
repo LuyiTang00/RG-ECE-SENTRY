@@ -3,7 +3,7 @@
 <title>Static Call Graph - [standard_tpye_c\standard_tpye_c.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image standard_tpye_c\standard_tpye_c.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Mon Jan 04 16:28:45 2021
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060422: Last Updated: Thu Feb 25 17:52:17 2021
 <BR><P>
 <H3>Maximum Stack Usage =        512 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -204,21 +204,21 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[98]"></a>_printf_f</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, _printf_f.o(.ARM.Collect$$_printf_percent$$00000003))
-<BR><BR>[Stack]<UL><LI>Max Depth = 324 + Unknown Stack Size
+<BR><BR>[Stack]<UL><LI>Max Depth = 320 + Unknown Stack Size
 <LI>Call Chain = _printf_f &rArr; _printf_fp_dec &rArr; _printf_fp_dec_real &rArr; _fp_digits &rArr; _btod_etento &rArr; _btod_emul &rArr; _e2e
 </UL>
 <BR>[Calls]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_fp_dec
 </UL>
 
 <P><STRONG><a name="[9a]"></a>_printf_e</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, _printf_e.o(.ARM.Collect$$_printf_percent$$00000004))
-<BR><BR>[Stack]<UL><LI>Max Depth = 324 + Unknown Stack Size
+<BR><BR>[Stack]<UL><LI>Max Depth = 320 + Unknown Stack Size
 <LI>Call Chain = _printf_e &rArr; _printf_fp_dec &rArr; _printf_fp_dec_real &rArr; _fp_digits &rArr; _btod_etento &rArr; _btod_emul &rArr; _e2e
 </UL>
 <BR>[Calls]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_fp_dec
 </UL>
 
 <P><STRONG><a name="[9b]"></a>_printf_g</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, _printf_g.o(.ARM.Collect$$_printf_percent$$00000005))
-<BR><BR>[Stack]<UL><LI>Max Depth = 324 + Unknown Stack Size
+<BR><BR>[Stack]<UL><LI>Max Depth = 320 + Unknown Stack Size
 <LI>Call Chain = _printf_g &rArr; _printf_fp_dec &rArr; _printf_fp_dec_real &rArr; _fp_digits &rArr; _btod_etento &rArr; _btod_emul &rArr; _e2e
 </UL>
 <BR>[Calls]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_fp_dec
@@ -1119,7 +1119,7 @@ Global Symbols
 <P><STRONG><a name="[394]"></a>__lib_sel_fp_printf</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, _printf_fp_dec.o(.text), UNUSED)
 
 <P><STRONG><a name="[f4]"></a>_printf_fp_dec_real</STRONG> (Thumb, 620 bytes, Stack size 104 bytes, _printf_fp_dec.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 324<LI>Call Chain = _printf_fp_dec_real &rArr; _fp_digits &rArr; _btod_etento &rArr; _btod_emul &rArr; _e2e
+<BR><BR>[Stack]<UL><LI>Max Depth = 320<LI>Call Chain = _printf_fp_dec_real &rArr; _fp_digits &rArr; _btod_etento &rArr; _btod_emul &rArr; _e2e
 </UL>
 <BR>[Calls]<UL><LI><a href="#[f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_fp_infnan
 <LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_locale
@@ -1251,8 +1251,8 @@ Global Symbols
 <LI><a href="#[f4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_fp_dec_real
 </UL>
 
-<P><STRONG><a name="[f0]"></a>_btod_etento</STRONG> (Thumb, 224 bytes, Stack size 72 bytes, bigflt0.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 124<LI>Call Chain = _btod_etento &rArr; _btod_emul &rArr; _e2e
+<P><STRONG><a name="[f0]"></a>_btod_etento</STRONG> (Thumb, 216 bytes, Stack size 72 bytes, bigflt0.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = _btod_etento &rArr; _btod_emul &rArr; _e2e
 </UL>
 <BR>[Calls]<UL><LI><a href="#[f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_btod_emul
 <LI><a href="#[f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_btod_ediv
@@ -1344,7 +1344,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_btod_ediv
 </UL>
 
-<P><STRONG><a name="[105]"></a>_e2e</STRONG> (Thumb, 220 bytes, Stack size 24 bytes, btod.o(CL$$btod_e2e))
+<P><STRONG><a name="[105]"></a>_e2e</STRONG> (Thumb, 198 bytes, Stack size 24 bytes, btod.o(CL$$btod_e2e))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = _e2e
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ieee_status
@@ -1353,8 +1353,8 @@ Global Symbols
 <LI><a href="#[f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_btod_ediv
 </UL>
 
-<P><STRONG><a name="[f2]"></a>_btod_ediv</STRONG> (Thumb, 42 bytes, Stack size 28 bytes, btod.o(CL$$btod_ediv))
-<BR><BR>[Stack]<UL><LI>Max Depth = 52<LI>Call Chain = _btod_ediv &rArr; _e2e
+<P><STRONG><a name="[f2]"></a>_btod_ediv</STRONG> (Thumb, 40 bytes, Stack size 24 bytes, btod.o(CL$$btod_ediv))
+<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = _btod_ediv &rArr; _e2e
 </UL>
 <BR>[Calls]<UL><LI><a href="#[105]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_e2e
 <LI><a href="#[106]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__btod_div_common
@@ -1363,8 +1363,8 @@ Global Symbols
 <LI><a href="#[ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fp_digits
 </UL>
 
-<P><STRONG><a name="[f3]"></a>_btod_emul</STRONG> (Thumb, 42 bytes, Stack size 28 bytes, btod.o(CL$$btod_emul))
-<BR><BR>[Stack]<UL><LI>Max Depth = 52<LI>Call Chain = _btod_emul &rArr; _e2e
+<P><STRONG><a name="[f3]"></a>_btod_emul</STRONG> (Thumb, 40 bytes, Stack size 24 bytes, btod.o(CL$$btod_emul))
+<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = _btod_emul &rArr; _e2e
 </UL>
 <BR>[Calls]<UL><LI><a href="#[107]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__btod_mult_common
 <LI><a href="#[105]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_e2e
@@ -1753,8 +1753,8 @@ Global Symbols
 <P><STRONG><a name="[13f]"></a>FLASH_WaitForLastOperation</STRONG> (Thumb, 90 bytes, Stack size 16 bytes, stm32f4xx_hal_flash.o(i.FLASH_WaitForLastOperation))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = FLASH_WaitForLastOperation
 </UL>
-<BR>[Calls]<UL><LI><a href="#[140]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
-<LI><a href="#[141]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FLASH_SetErrorCode
+<BR>[Calls]<UL><LI><a href="#[141]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FLASH_SetErrorCode
+<LI><a href="#[140]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
 </UL>
 <BR>[Called By]<UL><LI><a href="#[163]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_FLASHEx_Erase
 <LI><a href="#[167]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_FLASH_Program
@@ -1964,9 +1964,9 @@ Global Symbols
 <P><STRONG><a name="[15f]"></a>HAL_DMA_Init</STRONG> (Thumb, 232 bytes, Stack size 24 bytes, stm32f4xx_hal_dma.o(i.HAL_DMA_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = HAL_DMA_Init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[140]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
-<LI><a href="#[160]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_CheckFifoParam
+<BR>[Calls]<UL><LI><a href="#[160]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_CheckFifoParam
 <LI><a href="#[161]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_CalcBaseAndBitshift
+<LI><a href="#[140]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
 </UL>
 <BR>[Called By]<UL><LI><a href="#[1e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_MspInit
 <LI><a href="#[1d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_SPI_MspInit
@@ -2068,10 +2068,7 @@ Global Symbols
 <LI><a href="#[1ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_OscConfig
 <LI><a href="#[1c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_ClockConfig
 <LI><a href="#[1c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCCEx_PeriphCLKConfig
-<LI><a href="#[12f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_SPI_TransmitReceive
-<LI><a href="#[233]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_WaitFlagStateUntilTimeout
-<LI><a href="#[1cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RTC_EnterInitMode
-<LI><a href="#[1d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RTC_WaitForSynchro
+<LI><a href="#[13f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FLASH_WaitForLastOperation
 <LI><a href="#[162]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
 <LI><a href="#[15f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DMA_Init
 <LI><a href="#[148]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_ADC_PollForConversion
@@ -2084,7 +2081,10 @@ Global Symbols
 <LI><a href="#[173]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;I2C_WaitOnFlagUntilTimeout
 <LI><a href="#[176]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;I2C_WaitOnBTFFlagUntilTimeout
 <LI><a href="#[15c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_CAN_Start
-<LI><a href="#[13f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FLASH_WaitForLastOperation
+<LI><a href="#[12f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_SPI_TransmitReceive
+<LI><a href="#[233]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_WaitFlagStateUntilTimeout
+<LI><a href="#[1cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RTC_EnterInitMode
+<LI><a href="#[1d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RTC_WaitForSynchro
 </UL>
 
 <P><STRONG><a name="[16f]"></a>HAL_I2C_Init</STRONG> (Thumb, 422 bytes, Stack size 16 bytes, stm32f4xx_hal_i2c.o(i.HAL_I2C_Init))
@@ -2152,9 +2152,9 @@ Global Symbols
 <P><STRONG><a name="[17d]"></a>HAL_Init</STRONG> (Thumb, 54 bytes, Stack size 8 bytes, stm32f4xx_hal.o(i.HAL_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = HAL_Init &rArr; HAL_InitTick &rArr; HAL_NVIC_SetPriority &rArr; __NVIC_SetPriority
 </UL>
-<BR>[Calls]<UL><LI><a href="#[180]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_MspInit
-<LI><a href="#[17f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_InitTick
+<BR>[Calls]<UL><LI><a href="#[17f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_InitTick
 <LI><a href="#[17e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_SetPriorityGrouping
+<LI><a href="#[180]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_MspInit
 </UL>
 <BR>[Called By]<UL><LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -2194,10 +2194,10 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[157]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_CAN_MspInit
 <LI><a href="#[206]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_GPIO_Init
 <LI><a href="#[203]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_DMA_Init
+<LI><a href="#[17f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_InitTick
 <LI><a href="#[1b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_PCD_MspInit
 <LI><a href="#[1e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_MspInit
 <LI><a href="#[180]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_MspInit
-<LI><a href="#[17f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_InitTick
 </UL>
 
 <P><STRONG><a name="[17e]"></a>HAL_NVIC_SetPriorityGrouping</STRONG> (Thumb, 32 bytes, Stack size 0 bytes, stm32f4xx_hal_cortex.o(i.HAL_NVIC_SetPriorityGrouping))
@@ -2450,17 +2450,17 @@ Global Symbols
 <P><STRONG><a name="[1c6]"></a>HAL_RCC_ClockConfig</STRONG> (Thumb, 366 bytes, Stack size 16 bytes, stm32f4xx_hal_rcc.o(i.HAL_RCC_ClockConfig))
 <BR><BR>[Stack]<UL><LI>Max Depth = 96<LI>Call Chain = HAL_RCC_ClockConfig &rArr; HAL_RCC_GetSysClockFreq &rArr; __aeabi_uldivmod
 </UL>
-<BR>[Calls]<UL><LI><a href="#[140]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
-<LI><a href="#[1c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_GetSysClockFreq
+<BR>[Calls]<UL><LI><a href="#[1c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_GetSysClockFreq
 <LI><a href="#[17f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_InitTick
+<LI><a href="#[140]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
 </UL>
 <BR>[Called By]<UL><LI><a href="#[236]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemClock_Config
 </UL>
 
 <P><STRONG><a name="[1a9]"></a>HAL_RCC_GetHCLKFreq</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, stm32f4xx_hal_rcc.o(i.HAL_RCC_GetHCLKFreq))
-<BR><BR>[Called By]<UL><LI><a href="#[199]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_PCD_IRQHandler
+<BR><BR>[Called By]<UL><LI><a href="#[1c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_GetPCLK2Freq
+<LI><a href="#[199]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_PCD_IRQHandler
 <LI><a href="#[171]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_GetPCLK1Freq
-<LI><a href="#[1c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_GetPCLK2Freq
 </UL>
 
 <P><STRONG><a name="[171]"></a>HAL_RCC_GetPCLK1Freq</STRONG> (Thumb, 22 bytes, Stack size 4 bytes, stm32f4xx_hal_rcc.o(i.HAL_RCC_GetPCLK1Freq))
@@ -2468,8 +2468,8 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_GetHCLKFreq
 </UL>
-<BR>[Called By]<UL><LI><a href="#[16f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_I2C_Init
-<LI><a href="#[1e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_SetConfig
+<BR>[Called By]<UL><LI><a href="#[1e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_SetConfig
+<LI><a href="#[16f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_I2C_Init
 </UL>
 
 <P><STRONG><a name="[1c8]"></a>HAL_RCC_GetPCLK2Freq</STRONG> (Thumb, 22 bytes, Stack size 4 bytes, stm32f4xx_hal_rcc.o(i.HAL_RCC_GetPCLK2Freq))
@@ -2513,9 +2513,9 @@ Global Symbols
 <P><STRONG><a name="[1cd]"></a>HAL_RTC_Init</STRONG> (Thumb, 212 bytes, Stack size 8 bytes, stm32f4xx_hal_rtc.o(i.HAL_RTC_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = HAL_RTC_Init &rArr; RTC_EnterInitMode
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RTC_EnterInitMode
+<BR>[Calls]<UL><LI><a href="#[1ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RTC_MspInit
+<LI><a href="#[1cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RTC_EnterInitMode
 <LI><a href="#[1d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RTC_WaitForSynchro
-<LI><a href="#[1ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RTC_MspInit
 </UL>
 <BR>[Called By]<UL><LI><a href="#[20b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_RTC_Init
 </UL>
@@ -2556,8 +2556,8 @@ Global Symbols
 <P><STRONG><a name="[12f]"></a>HAL_SPI_TransmitReceive</STRONG> (Thumb, 554 bytes, Stack size 56 bytes, stm32f4xx_hal_spi.o(i.HAL_SPI_TransmitReceive))
 <BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = HAL_SPI_TransmitReceive &rArr; SPI_EndRxTxTransaction &rArr; SPI_WaitFlagStateUntilTimeout
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_EndRxTxTransaction
-<LI><a href="#[140]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
+<BR>[Calls]<UL><LI><a href="#[140]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
+<LI><a href="#[1d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_EndRxTxTransaction
 </UL>
 <BR>[Called By]<UL><LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BMI088_read_write_byte
 </UL>
@@ -2588,10 +2588,10 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[1d4]"></a>HAL_TIM_Base_Init</STRONG> (Thumb, 52 bytes, Stack size 8 bytes, stm32f4xx_hal_tim.o(i.HAL_TIM_Base_Init))
-<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = HAL_TIM_Base_Init &rArr; HAL_TIM_Base_MspInit
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = HAL_TIM_Base_Init &rArr; TIM_Base_SetConfig
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Base_MspInit
-<LI><a href="#[1d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_Base_SetConfig
+<BR>[Calls]<UL><LI><a href="#[1d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_Base_SetConfig
+<LI><a href="#[1d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Base_MspInit
 </UL>
 <BR>[Called By]<UL><LI><a href="#[215]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_TIM8_Init
 <LI><a href="#[214]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_TIM5_Init
@@ -2687,8 +2687,8 @@ Global Symbols
 <P><STRONG><a name="[1e7]"></a>HAL_UART_Init</STRONG> (Thumb, 114 bytes, Stack size 8 bytes, stm32f4xx_hal_uart.o(i.HAL_UART_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = HAL_UART_Init &rArr; HAL_UART_MspInit &rArr; HAL_NVIC_SetPriority &rArr; __NVIC_SetPriority
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_MspInit
-<LI><a href="#[1e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_SetConfig
+<BR>[Calls]<UL><LI><a href="#[1e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_SetConfig
+<LI><a href="#[1e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_MspInit
 </UL>
 <BR>[Called By]<UL><LI><a href="#[218]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_USART6_UART_Init
 <LI><a href="#[217]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_USART3_UART_Init
@@ -4245,10 +4245,10 @@ Global Symbols
 <P><STRONG><a name="[278]"></a>flash_erase_address</STRONG> (Thumb, 46 bytes, Stack size 40 bytes, bsp_flash.o(i.flash_erase_address))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = flash_erase_address &rArr; HAL_FLASHEx_Erase &rArr; FLASH_WaitForLastOperation
 </UL>
-<BR>[Calls]<UL><LI><a href="#[2ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ger_sector
-<LI><a href="#[163]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_FLASHEx_Erase
+<BR>[Calls]<UL><LI><a href="#[163]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_FLASHEx_Erase
 <LI><a href="#[2ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_FLASH_Unlock
 <LI><a href="#[2ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_FLASH_Lock
+<LI><a href="#[2ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ger_sector
 </UL>
 <BR>[Called By]<UL><LI><a href="#[277]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cali_data_write
 </UL>
@@ -4264,10 +4264,10 @@ Global Symbols
 <P><STRONG><a name="[279]"></a>flash_write_single_address</STRONG> (Thumb, 136 bytes, Stack size 24 bytes, bsp_flash.o(i.flash_write_single_address))
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = flash_write_single_address &rArr; HAL_FLASH_Program &rArr; FLASH_WaitForLastOperation
 </UL>
-<BR>[Calls]<UL><LI><a href="#[2af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_next_flash_address
-<LI><a href="#[2ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_FLASH_Unlock
+<BR>[Calls]<UL><LI><a href="#[2ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_FLASH_Unlock
 <LI><a href="#[167]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_FLASH_Program
 <LI><a href="#[2ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_FLASH_Lock
+<LI><a href="#[2af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_next_flash_address
 </UL>
 <BR>[Called By]<UL><LI><a href="#[277]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cali_data_write
 </UL>
@@ -5486,7 +5486,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[99]"></a>_printf_fp_dec</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, printf1.o(x$fpl$printf1))
-<BR><BR>[Stack]<UL><LI>Max Depth = 324<LI>Call Chain = _printf_fp_dec &rArr; _printf_fp_dec_real &rArr; _fp_digits &rArr; _btod_etento &rArr; _btod_emul &rArr; _e2e
+<BR><BR>[Stack]<UL><LI>Max Depth = 320<LI>Call Chain = _printf_fp_dec &rArr; _printf_fp_dec_real &rArr; _fp_digits &rArr; _btod_etento &rArr; _btod_emul &rArr; _e2e
 </UL>
 <BR>[Calls]<UL><LI><a href="#[f4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_fp_dec_real
 </UL>
@@ -5734,10 +5734,10 @@ Local Symbols
 </UL>
 
 <P><STRONG><a name="[1e9]"></a>UART_SetConfig</STRONG> (Thumb, 864 bytes, Stack size 24 bytes, stm32f4xx_hal_uart.o(i.UART_SetConfig))
-<BR><BR>[Stack]<UL><LI>Max Depth = 28<LI>Call Chain = UART_SetConfig &rArr; HAL_RCC_GetPCLK1Freq
+<BR><BR>[Stack]<UL><LI>Max Depth = 28<LI>Call Chain = UART_SetConfig &rArr; HAL_RCC_GetPCLK2Freq
 </UL>
-<BR>[Calls]<UL><LI><a href="#[171]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_GetPCLK1Freq
-<LI><a href="#[1c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_GetPCLK2Freq
+<BR>[Calls]<UL><LI><a href="#[1c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_GetPCLK2Freq
+<LI><a href="#[171]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_GetPCLK1Freq
 </UL>
 <BR>[Called By]<UL><LI><a href="#[1e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Init
 </UL>
@@ -6736,8 +6736,8 @@ Local Symbols
 <P><STRONG><a name="[7e]"></a>_printf_input_char</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, _printf_char_common.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> _printf_char_common.o(.text)
 </UL>
-<P><STRONG><a name="[ee]"></a>_fp_digits</STRONG> (Thumb, 432 bytes, Stack size 96 bytes, _printf_fp_dec.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 220<LI>Call Chain = _fp_digits &rArr; _btod_etento &rArr; _btod_emul &rArr; _e2e
+<P><STRONG><a name="[ee]"></a>_fp_digits</STRONG> (Thumb, 428 bytes, Stack size 96 bytes, _printf_fp_dec.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 216<LI>Call Chain = _fp_digits &rArr; _btod_etento &rArr; _btod_emul &rArr; _e2e
 </UL>
 <BR>[Calls]<UL><LI><a href="#[f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_btod_emul
 <LI><a href="#[f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_btod_ediv

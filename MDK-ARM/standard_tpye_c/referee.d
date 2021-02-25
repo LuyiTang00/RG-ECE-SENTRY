@@ -49,3 +49,4 @@ standard_tpye_c\referee.o: ..\application\protocol\protocol.h
 standard_tpye_c\referee.o: ..\application\struct_typedef.h
 standard_tpye_c\referee.o: D:\STM\ARM\ARMCC\Bin\..\include\string.h
 standard_tpye_c\referee.o: D:\STM\ARM\ARMCC\Bin\..\include\stdio.h
+standard_tpye_c\referee.o: ..\components\support\CRC8_CRC16.h

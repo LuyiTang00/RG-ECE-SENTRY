@@ -27,7 +27,17 @@
 #include "referee.h"
 
 
+uint32_t sendTask_TimeStamp = 0; //发送时间戳
+const uint16_t sendFreq = 50; //发送间隔 （ms)
 
+void sendTask_EE_To_CV(uint8_t cmd_ID,uint8_t level, uint8_t robot_ID){
+			
+	if(xTaskGetTickCount()-sendFreq >sendTask_TimeStamp){ //若时间间隔已到，则发送并更新时间戳
+		sendTask_TimeStamp = xTaskGetTickCount(); //更新时间戳
+		HAL_UART_Transmit( *USART1, HEADER, 1, 10);
+		
+	}
+}
 
 /**
   * @brief          single byte upacked 

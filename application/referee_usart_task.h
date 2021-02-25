@@ -32,4 +32,31 @@
   * @retval         none
   */
 extern void referee_usart_task(void const * argument);
+
+/*
+@brief         发送机器人数据至上位机（UART1)
+                Rui Peng 2021/2/25
+								测试版本
+*/
+void sendTask_EE_To_CV(uint8_t cmd_ID,uint8_t level, uint8_t robot_ID);
+	
+/*
+@brief  各种CV——EE/通讯配置
+*/
+
+const uint8_t HEADER = 0xaf; //包头
+#define AUTOFIRE 0xff //自动开火
+#define AUTOAIM 0x00 //自动瞄准
+#define MANUEL  0xfa //纯手动模式
+#define BIGBUFF 0xbb //打大符
+#define SINBIGBUFF 0xaa //变速大符
+
+#define LEVEL_I  0x01 //1级
+#define LEVEL_II 0x02 //2级
+#define LEVEL_III 0x03 //3级
+
+#define RobotID_Red 0xff //己方机器人颜色
+#define RobotID_Blue 0x00 //己方机器人颜色
+
+
 #endif

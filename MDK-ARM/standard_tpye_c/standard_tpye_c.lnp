@@ -112,6 +112,6 @@
 "standard_tpye_c\mem_mang4.o"
 "standard_tpye_c\pid.o"
 --strict --scatter "standard_tpye_c\standard_tpye_c.sct"
---summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--summary_stderr --info summarysizes --map --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
 --list "standard_tpye_c.map" -o standard_tpye_c\standard_tpye_c.axf

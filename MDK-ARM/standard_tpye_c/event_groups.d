@@ -1,8 +1,8 @@
 standard_tpye_c\event_groups.o: ../Middlewares/Third_Party/FreeRTOS/Source/event_groups.c
-standard_tpye_c\event_groups.o: C:\Users\95829\Downloads\robotgrinder\ARM\ARMCC\Bin\..\include\stdlib.h
+standard_tpye_c\event_groups.o: D:\STM\ARM\ARMCC\Bin\..\include\stdlib.h
 standard_tpye_c\event_groups.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
-standard_tpye_c\event_groups.o: C:\Users\95829\Downloads\robotgrinder\ARM\ARMCC\Bin\..\include\stddef.h
-standard_tpye_c\event_groups.o: C:\Users\95829\Downloads\robotgrinder\ARM\ARMCC\Bin\..\include\stdint.h
+standard_tpye_c\event_groups.o: D:\STM\ARM\ARMCC\Bin\..\include\stddef.h
+standard_tpye_c\event_groups.o: D:\STM\ARM\ARMCC\Bin\..\include\stdint.h
 standard_tpye_c\event_groups.o: ../Inc/FreeRTOSConfig.h
 standard_tpye_c\event_groups.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 standard_tpye_c\event_groups.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h

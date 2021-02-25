@@ -1,7 +1,7 @@
 standard_tpye_c\croutine.o: ../Middlewares/Third_Party/FreeRTOS/Source/croutine.c
 standard_tpye_c\croutine.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
-standard_tpye_c\croutine.o: C:\Users\95829\Downloads\robotgrinder\ARM\ARMCC\Bin\..\include\stddef.h
-standard_tpye_c\croutine.o: C:\Users\95829\Downloads\robotgrinder\ARM\ARMCC\Bin\..\include\stdint.h
+standard_tpye_c\croutine.o: D:\STM\ARM\ARMCC\Bin\..\include\stddef.h
+standard_tpye_c\croutine.o: D:\STM\ARM\ARMCC\Bin\..\include\stdint.h
 standard_tpye_c\croutine.o: ../Inc/FreeRTOSConfig.h
 standard_tpye_c\croutine.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 standard_tpye_c\croutine.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h

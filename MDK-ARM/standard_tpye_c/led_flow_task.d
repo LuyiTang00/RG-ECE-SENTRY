@@ -4,8 +4,8 @@ standard_tpye_c\led_flow_task.o: ..\application\struct_typedef.h
 standard_tpye_c\led_flow_task.o: ..\bsp\boards\bsp_led.h
 standard_tpye_c\led_flow_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 standard_tpye_c\led_flow_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
-standard_tpye_c\led_flow_task.o: C:\Users\95829\Downloads\robotgrinder\ARM\ARMCC\Bin\..\include\stddef.h
-standard_tpye_c\led_flow_task.o: C:\Users\95829\Downloads\robotgrinder\ARM\ARMCC\Bin\..\include\stdint.h
+standard_tpye_c\led_flow_task.o: D:\STM\ARM\ARMCC\Bin\..\include\stddef.h
+standard_tpye_c\led_flow_task.o: D:\STM\ARM\ARMCC\Bin\..\include\stdint.h
 standard_tpye_c\led_flow_task.o: ../Inc/FreeRTOSConfig.h
 standard_tpye_c\led_flow_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 standard_tpye_c\led_flow_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h

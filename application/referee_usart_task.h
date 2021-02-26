@@ -34,11 +34,11 @@
 extern void referee_usart_task(void const * argument);
 
 /*
-@brief         发送机器人数据至上位机（UART1)
+@brief         打包发送机器人数据    （UART1)
                 Rui Peng 2021/2/25
 								测试版本
 */
-void sendTask_EE_To_CV(uint8_t cmd_ID,uint8_t level, uint8_t robot_ID);
+void sendPack(uint8_t cmd_ID,uint8_t level, uint8_t robot_ID);
 	
 /*
 @brief  各种CV——EE/通讯配置
@@ -58,6 +58,22 @@ void sendTask_EE_To_CV(uint8_t cmd_ID,uint8_t level, uint8_t robot_ID);
 
 #define ROBOTID_RED 0xff  //己方机器人颜色
 #define ROBOTID_BLUE 0x00  //己方机器人颜色
+
+
+
+
+
+
+/*
+@brief         与上位机通讯  任务   （发送） （UART1)
+                Rui Peng 2021/2/25
+								测试版本
+*/
+
+
+
+void sendData_Task_EE_To_PC(void);
+
 
 
 #endif

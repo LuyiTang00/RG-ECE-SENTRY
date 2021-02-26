@@ -66,7 +66,7 @@ void referee_usart_task(void const * argument)
 
     while(1)
     {
-        sendTask_EE_To_CV(AUTOAIM,LEVEL_I,ROBOTID_RED); //发送机器人数据至上位机（UART1)
+        sendData_Task_EE_To_PC(); //通讯 发送任务
         referee_unpack_fifo_data();
         osDelay(10);
     }
@@ -214,35 +214,57 @@ void USART6_IRQHandler(void)
 }
 
 /*
-@brief         发送机器人数据至上位机（UART1)
+@brief         打包发送机器人数据（UART1)
                 Rui Peng 2021/2/25
 								测试版本
 */
 uint32_t sendTask_TimeStamp = 0; //发送时间戳
 const uint16_t sendFreq = 10; //发送间隔 （ms)
 
-void sendTask_EE_To_CV(uint8_t cmd_ID,uint8_t level, uint8_t robot_ID){
+void sendPack(uint8_t cmd_ID,uint8_t level, uint8_t robot_ID){
 			
 	if(xTaskGetTickCount()-sendFreq >sendTask_TimeStamp){ //若时间间隔已到，则发送并更新时间戳
+		 
 		 sendTask_TimeStamp = xTaskGetTickCount(); //更新时间戳   
-		 uint8_t dataToSend = HEADER; //傻逼KEIL
-     HAL_UART_Transmit(&huart1, &dataToSend, 1, 10); // 发送包头
+		 uint8_t dataToSend = HEADER; 
+     HAL_UART_Transmit(&huart1, &dataToSend, 1, 3); // 发送包头
 		 
-		 dataToSend = cmd_ID; //傻逼KEIL
-		 HAL_UART_Transmit(&huart1, &dataToSend, 1, 10); // 发送CMD_ID
+		 dataToSend = cmd_ID; 
+		 HAL_UART_Transmit(&huart1, &dataToSend, 1, 3); // 发送CMD_ID
 		
-		 dataToSend = level; //傻逼KEIL
-		 HAL_UART_Transmit(&huart1, &dataToSend, 1, 10); // 发送level
+		 dataToSend = level; 
+		 HAL_UART_Transmit(&huart1, &dataToSend, 1, 3); // 发送level
 		 
-		 dataToSend = robot_ID; //傻逼KEIL
-		 HAL_UART_Transmit(&huart1, &dataToSend, 1, 10); // 发送robot_ID
+		 dataToSend = robot_ID; 
+		 HAL_UART_Transmit(&huart1, &dataToSend, 1, 3); // 发送robot_ID
 		 
-		 uint8_t head = HEADER;//傻逼KEIL
-		 uint8_t checkSum = head + cmd_ID + level + robot_ID; //校验和
+		 uint8_t head = HEADER;
+		 uint8_t checkSum = head + cmd_ID + level + robot_ID; //计算校验和 （勿动“uint8_t”）
 		
-		 dataToSend = checkSum; //傻逼KEIL
-		 HAL_UART_Transmit(&huart1, &dataToSend, 1, 10); // 发送校验和
+		 dataToSend = checkSum; 
+		 HAL_UART_Transmit(&huart1, &dataToSend, 1, 3); // 发送校验和
 	}
+}
+
+
+/*
+@brief         与上位机通讯 （发送） （UART1)
+                Rui Peng 2021/2/25
+								测试版本
+*/
+
+
+void sendData_Task_EE_To_PC(void){
+	
+ uint8_t task_cmdID = MANUEL;   //默认值
+ uint8_t task_level = LEVEL_I;  //默认值
+ uint8_t task_robotID = ROBOTID_RED; //默认值
+
+	
+	
+	
+ 
+ sendPack(task_cmdID,task_level,task_robotID); //打包发送机器人数据至上位机（UART1)
 }
 
 

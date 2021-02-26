@@ -26,19 +26,6 @@
 #include "protocol.h"
 #include "referee.h"
 
-
-uint32_t sendTask_TimeStamp = 0; //发送时间戳
-const uint16_t sendFreq = 50; //发送间隔 （ms)
-
-void sendTask_EE_To_CV(uint8_t cmd_ID,uint8_t level, uint8_t robot_ID){
-			
-	if(xTaskGetTickCount()-sendFreq >sendTask_TimeStamp){ //若时间间隔已到，则发送并更新时间戳
-		sendTask_TimeStamp = xTaskGetTickCount(); //更新时间戳
-		HAL_UART_Transmit(     USART1, HEADER, 1, 10);
-		
-	}
-}
-
 /**
   * @brief          single byte upacked 
   * @param[in]      void
@@ -53,6 +40,7 @@ static void referee_unpack_fifo_data(void);
 
  
 extern UART_HandleTypeDef huart6;
+extern UART_HandleTypeDef huart1;
 
 uint8_t usart6_buf[2][USART_RX_BUF_LENGHT];
 
@@ -78,7 +66,7 @@ void referee_usart_task(void const * argument)
 
     while(1)
     {
-
+        sendTask_EE_To_CV(AUTOAIM,LEVEL_I,ROBOTID_RED); //发送机器人数据至上位机（UART1)
         referee_unpack_fifo_data();
         osDelay(10);
     }
@@ -224,5 +212,41 @@ void USART6_IRQHandler(void)
         }
     }
 }
+
+/*
+@brief         发送机器人数据至上位机（UART1)
+                Rui Peng 2021/2/25
+								测试版本
+*/
+uint32_t sendTask_TimeStamp = 0; //发送时间戳
+const uint16_t sendFreq = 10; //发送间隔 （ms)
+
+void sendTask_EE_To_CV(uint8_t cmd_ID,uint8_t level, uint8_t robot_ID){
+			
+	if(xTaskGetTickCount()-sendFreq >sendTask_TimeStamp){ //若时间间隔已到，则发送并更新时间戳
+		 sendTask_TimeStamp = xTaskGetTickCount(); //更新时间戳   
+		 uint8_t dataToSend = HEADER; //傻逼KEIL
+     HAL_UART_Transmit(&huart1, &dataToSend, 1, 10); // 发送包头
+		 
+		 dataToSend = cmd_ID; //傻逼KEIL
+		 HAL_UART_Transmit(&huart1, &dataToSend, 1, 10); // 发送CMD_ID
+		
+		 dataToSend = level; //傻逼KEIL
+		 HAL_UART_Transmit(&huart1, &dataToSend, 1, 10); // 发送level
+		 
+		 dataToSend = robot_ID; //傻逼KEIL
+		 HAL_UART_Transmit(&huart1, &dataToSend, 1, 10); // 发送robot_ID
+		 
+		 uint8_t head = HEADER;//傻逼KEIL
+		 uint8_t checkSum = head + cmd_ID + level + robot_ID; //校验和
+		
+		 dataToSend = checkSum; //傻逼KEIL
+		 HAL_UART_Transmit(&huart1, &dataToSend, 1, 10); // 发送校验和
+	}
+}
+
+
+
+
 
 

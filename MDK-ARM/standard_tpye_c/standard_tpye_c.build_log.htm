@@ -28,18 +28,10 @@ Project File Date:  02/25/2021
 *** Using Compiler 'V5.06 update 4 (build 422)', folder: 'D:\STM\ARM\ARMCC\Bin'
 Build target 'standard_tpye_c'
 compiling referee_usart_task.c...
-..\application\referee_usart_task.c(37): error:  #167: argument of type "USART_TypeDef" is incompatible with parameter of type "UART_HandleTypeDef *"
-  		HAL_UART_Transmit(*
-SART1, 
-EADER , 1, 10);
-..\application\referee_usart_task.c(37): error:  #167: argument of type "int" is incompatible with parameter of type "uint8_t *"
-  		HAL_UART_Transmit(*
-SART1, 
-EADER , 1, 10);
-..\application\referee_usart_task.c: 0 warnings, 2 errors
-compiling main.c...
-compiling freertos.c...
-"standard_tpye_c\standard_tpye_c.axf" - 2 Error(s), 0 Warning(s).
+linking...
+Program Size: Code=93796 RO-data=13732 RW-data=1184 ZI-data=57824  
+FromELF: creating hex file...
+"standard_tpye_c\standard_tpye_c.axf" - 0 Error(s), 0 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -57,8 +49,7 @@ Package Vendor: ARM
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.0.1
-Target not created.
-Build Time Elapsed:  00:00:04
+Build Time Elapsed:  00:00:12
 </pre>
 </body>
 </html>

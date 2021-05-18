@@ -102,7 +102,7 @@
 #define MAX_WHEEL_SPEED 4.0f
 //chassis forward or back max speed
 //底盘运动过程最大前进速度
-#define NORMAL_MAX_CHASSIS_SPEED_X 4.0f //PR test 2.0
+#define NORMAL_MAX_CHASSIS_SPEED_X 3.0f //PR test 2.0
 //chassis left or right max speed
 //底盘运动过程最大平移速度
 #define NORMAL_MAX_CHASSIS_SPEED_Y 1.5f
@@ -118,7 +118,7 @@
 
 //chassis motor speed PID
 //底盘电机速度环PID
-#define M3505_MOTOR_SPEED_PID_KP 15000.0f
+#define M3505_MOTOR_SPEED_PID_KP 5000.0f
 #define M3505_MOTOR_SPEED_PID_KI 10.0f
 #define M3505_MOTOR_SPEED_PID_KD 0.0f
 #define M3505_MOTOR_SPEED_PID_MAX_OUT MAX_MOTOR_CAN_CURRENT
@@ -126,8 +126,8 @@
 
 //chassis follow angle PID
 //底盘旋转跟随PID	
-#define CHASSIS_FOLLOW_GIMBAL_PID_KP 30.0f //40.0f  //Pr
-#define CHASSIS_FOLLOW_GIMBAL_PID_KI 0.0f
+#define CHASSIS_FOLLOW_GIMBAL_PID_KP 25.0f //40.0f  //Pr
+#define CHASSIS_FOLLOW_GIMBAL_PID_KI 0.001f
 #define CHASSIS_FOLLOW_GIMBAL_PID_KD 0.0f
 #define CHASSIS_FOLLOW_GIMBAL_PID_MAX_OUT 6.0f
 #define CHASSIS_FOLLOW_GIMBAL_PID_MAX_IOUT 0.2f

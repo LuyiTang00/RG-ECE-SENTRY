@@ -627,6 +627,15 @@ const gimbal_motor_t *get_pitch_motor_point(void)
     return &gimbal_control.gimbal_pitch_motor;
 }
 
+
+/** PR test 2021/4/3, ‘∆Ã®÷∏’Î
+*
+*/
+gimbal_control_t *get_gimbal_pointer(void)
+ {    
+	   gimbal_control_t * sp= &gimbal_control;
+     return sp;
+ }
 /**
   * @brief          "gimbal_control" valiable initialization, include pid initialization, remote control data point initialization, gimbal motors
   *                 data point initialization, and gyro sensor angle point initialization.

@@ -134,6 +134,9 @@ typedef struct
     uint16_t heat;
 } shoot_control_t;
 
+extern uint8_t shootCommand; //自动开火指令  0x00 = 停火  0xff = 开火
+
+
 //由于射击和云台使用同一个can的id故也射击任务在云台任务中执行
 extern void shoot_init(void);
 extern int16_t shoot_control_loop(void);

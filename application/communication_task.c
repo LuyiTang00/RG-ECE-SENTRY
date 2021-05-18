@@ -11,10 +11,11 @@ extern UART_HandleTypeDef huart1;
 extern DMA_HandleTypeDef hdma_usart1_rx;
 extern DMA_HandleTypeDef hdma_usart1_tx;
 
+
 #define PC_RX_BUF_NUM 50
 static uint8_t pc_rx_buf[2][PC_RX_BUF_NUM];
 
-gimbal_control_t* p_gimbal_control = NULL;
+ gimbal_control_t* p_gimbal_control = NULL;
 
 struct gimbal_cmd gimbal_cmd_t;
 
@@ -22,7 +23,9 @@ struct gimbal_cmd gimbal_cmd_t;
 void pc_control_init(void)
 {
     usart1_init(pc_rx_buf[0], pc_rx_buf[1], PC_RX_BUF_NUM);
-		p_gimbal_control = get_gimbal_pointer();
+
+	  p_gimbal_control = get_gimbal_pointer();
+
 }
 
 
@@ -113,5 +116,6 @@ void USART1_IRQHandler(void)
     }
 
 }
+
 
 

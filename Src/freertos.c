@@ -38,6 +38,8 @@
 #include "usb_task.h"
 #include "voltage_task.h"
 #include "servo_task.h"
+
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -174,7 +176,7 @@ void MX_FREERTOS_Init(void) {
 
     osThreadDef(REFEREE, referee_usart_task, osPriorityNormal, 0, 128);
     referee_usart_task_handle = osThreadCreate(osThread(REFEREE), NULL);
-
+		
 
     osThreadDef(USBTask, usb_task, osPriorityNormal, 0, 128);
     usb_task_handle = osThreadCreate(osThread(USBTask), NULL);

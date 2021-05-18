@@ -17,14 +17,22 @@
 #include "referee_usart_task.h"
 #include "main.h"
 #include "cmsis_os.h"
-
 #include "bsp_usart.h"
 #include "detect_task.h"
-
 #include "CRC8_CRC16.h"
 #include "fifo.h"
 #include "protocol.h"
 #include "referee.h"
+#include "stm32f4xx_hal.h"
+#include "gimbal_task.h"
+#include "gimbal_behaviour.h"
+#include "gimbal_task.h"
+#include "bsp_usart.h"
+#include "arm_math.h"
+#include "user_lib.h"
+
+\
+
 
 /**
   * @brief          single byte upacked 
@@ -43,7 +51,6 @@ extern UART_HandleTypeDef huart6;
 extern UART_HandleTypeDef huart1;
 
 uint8_t usart6_buf[2][USART_RX_BUF_LENGHT];
-
 fifo_s_t referee_fifo;
 uint8_t referee_fifo_buf[REFEREE_FIFO_BUF_LENGTH];
 unpack_data_t referee_unpack_obj;
@@ -63,6 +70,7 @@ void referee_usart_task(void const * argument)
     init_referee_struct_data();
     fifo_s_init(&referee_fifo, referee_fifo_buf, REFEREE_FIFO_BUF_LENGTH);
     usart6_init(usart6_buf[0], usart6_buf[1], USART_RX_BUF_LENGHT);
+    pc_control_init();
 
     while(1)
     {
@@ -259,16 +267,189 @@ void sendData_Task_EE_To_PC(void){
  uint8_t task_cmdID = MANUEL;   //默认值
  uint8_t task_level = LEVEL_I;  //默认值
  uint8_t task_robotID = ROBOTID_RED; //默认值
-
-	
-	
-	
- 
  sendPack(task_cmdID,task_level,task_robotID); //打包发送机器人数据至上位机（UART1)
 }
 
 
+//=====================================================
 
 
+
+#define PC_RX_BUF_NUM 50
+uint8_t pc_rx_buf[2][PC_RX_BUF_NUM];
+
+ gimbal_control_t* p_gimbal_control = NULL;
+
+struct gimbal_cmd gimbal_cmd_t;
+
+void pc_control_init(void)
+{
+    usart1_init(pc_rx_buf[0], pc_rx_buf[1], PC_RX_BUF_NUM);
+	  p_gimbal_control = get_gimbal_pointer();
+}
+
+
+uint8_t shootCommand = 0x00;//自动开火指令  0x00 = 停火  0xff = 开火
+uint8_t fricCommand = 0x01;// 摩擦轮转速指令  0x01 =低转  0x02 = 高转
+uint8_t commandLeng = 0; //test
+
+static void pc_command_unpack(uint8_t *buf, uint16_t len)
+{  
+	commandLeng = len; //test
+	if(len == PACK_LENG){
+		if( buf[0] == HEADER){ //若为包头
+			uint8_t checkSum = 0;  
+			for(uint8_t i = 0;i<PACK_LENG-1;i++)
+			{
+			checkSum = buf[i]+ checkSum;
+			}
+			if(checkSum == buf[PACK_LENG-1]){ //检查校验和 if checkSum OK
+			  uint16_t pitchCommand = buf[1];
+        pitchCommand <<= 8;
+        pitchCommand |= buf[2];//合并高低位
+				
+			  uint16_t yawCommand = buf[1];
+        yawCommand <<= 8;
+        yawCommand |= buf[2];   //合并高低位
+			  
+			  p_gimbal_control->gimbal_yaw_motor.absolute_angle_set = rad_format(p_gimbal_control->gimbal_yaw_motor.absolute_angle + yawCommand);
+			  p_gimbal_control->gimbal_pitch_motor.absolute_angle_set = rad_format(p_gimbal_control->gimbal_pitch_motor.absolute_angle + pitchCommand);
+			 
+			 	if(buf[6]== 0xff){  //开火指令
+				  shootCommand = 0xff;
+				}else{
+				  shootCommand = 0x00;
+				}
+	 }
+	}
+ }
+}
+
+//void USART1_IRQHandler(void)
+//{
+//    static volatile uint8_t res;
+//    if(USART1->SR & UART_FLAG_IDLE)
+//    {
+//        __HAL_UART_CLEAR_PEFLAG(&huart1);
+
+//        static uint16_t this_time_rx_len = 0;
+
+//        if ((huart1.hdmarx->Instance->CR & DMA_SxCR_CT) == RESET)
+//        {
+//            __HAL_DMA_DISABLE(huart1.hdmarx);
+//            this_time_rx_len = PC_RX_BUF_NUM - __HAL_DMA_GET_COUNTER(huart1.hdmarx);
+//            __HAL_DMA_SET_COUNTER(huart1.hdmarx, PC_RX_BUF_NUM);
+//            huart1.hdmarx->Instance->CR |= DMA_SxCR_CT;
+//            __HAL_DMA_ENABLE(huart1.hdmarx);
+//           // fifo_s_puts(&referee_fifo, (char*)usart6_buf[0], this_time_rx_len);
+//					pc_command_unpack(pc_rx_buf[0], this_time_rx_len);
+//					//usart1_tx_dma_enable(pc_rx_buf[0], this_time_rx_len);
+//         //   detect_hook(REFEREE_TOE);
+//        }
+//        else
+//        {
+//            __HAL_DMA_DISABLE(huart1.hdmarx);
+//            this_time_rx_len = PC_RX_BUF_NUM - __HAL_DMA_GET_COUNTER(huart1.hdmarx);
+//            __HAL_DMA_SET_COUNTER(huart1.hdmarx, PC_RX_BUF_NUM);
+//            huart1.hdmarx->Instance->CR &= ~(DMA_SxCR_CT);
+//            __HAL_DMA_ENABLE(huart1.hdmarx);
+//            //fifo_s_puts(&referee_fifo, (char*)usart6_buf[1], this_time_rx_len);
+//					pc_command_unpack(pc_rx_buf[1], this_time_rx_len);
+//				//		usart1_tx_dma_enable(pc_rx_buf[1], this_time_rx_len);
+//         //   detect_hook(REFEREE_TOE);
+//        }
+//    }
+//}
+/*
+static void pc_command_unpack(uint8_t *buf, uint16_t len)
+{
+	if (buf[0] == 0xaf) {
+		if (buf[1] == GIMBAL_MOVEMENT) {
+			memcpy(&gimbal_cmd_t, buf, sizeof(gimbal_cmd_t));
+			fp32 yaw = rad_format((fp32)gimbal_cmd_t.yaw/10000);
+			fp32 pitch = rad_format((fp32)gimbal_cmd_t.pitch/10000);
+			p_gimbal_control->gimbal_yaw_motor.absolute_angle_set = rad_format(p_gimbal_control->gimbal_yaw_motor.absolute_angle + yaw);
+			p_gimbal_control->gimbal_pitch_motor.absolute_angle_set = rad_format(p_gimbal_control->gimbal_pitch_motor.absolute_angle + pitch);
+
+		}
+	}
+}
+
+*/	
+
+//串口中断
+
+void USART1_IRQHandler(void)
+{
+    if(huart1.Instance->SR & UART_FLAG_RXNE)//接收到数据
+    {
+        __HAL_UART_CLEAR_PEFLAG(&huart1);
+    }
+    else if(USART1->SR & UART_FLAG_IDLE)
+    {
+        static uint16_t this_time_rx_len = 0;
+
+        __HAL_UART_CLEAR_PEFLAG(&huart1);
+
+        if ((huart1.hdmarx->Instance->CR & DMA_SxCR_CT) == RESET)
+        {
+            /* Current memory buffer used is Memory 0 */
+
+            //disable DMA
+            //失效DMA
+            __HAL_DMA_DISABLE(huart1.hdmarx);
+            //get receive data length, length = set_data_length - remain_length
+            //获取接收数据长度,长度 = 设定长度 - 剩余长度
+            this_time_rx_len = PC_RX_BUF_NUM - __HAL_DMA_GET_COUNTER(huart1.hdmarx);
+
+            //reset set_data_lenght
+            //重新设定数据长度
+            huart1.hdmarx->Instance->NDTR = PC_RX_BUF_NUM;
+
+            //set memory buffer 1
+            //设定缓冲区1
+            huart1.hdmarx->Instance->CR |= DMA_SxCR_CT;
+            
+            //enable DMA
+            //使能DMA
+            __HAL_DMA_ENABLE(huart1.hdmarx);
+
+						HAL_UART_Receive_DMA(&huart1,(uint8_t*)pc_rx_buf[0], this_time_rx_len);
+						pc_command_unpack((uint8_t*)pc_rx_buf[0], this_time_rx_len);
+						//记录数据接收时间
+						//detect_hook(DBUS_TOE);
+            
+        }
+        else
+        {
+            /* Current memory buffer used is Memory 1 */
+            //disable DMA
+            //失效DMA
+            __HAL_DMA_DISABLE(huart1.hdmarx);
+
+            //get receive data length, length = set_data_length - remain_length
+            //获取接收数据长度,长度 = 设定长度 - 剩余长度
+            this_time_rx_len = PC_RX_BUF_NUM - huart1.hdmarx->Instance->NDTR;
+
+            //reset set_data_lenght
+            //重新设定数据长度
+            huart1.hdmarx->Instance->NDTR = PC_RX_BUF_NUM;
+
+            //set memory buffer 0
+            //设定缓冲区0
+            DMA2_Stream5->CR &= ~(DMA_SxCR_CT);
+            
+            //enable DMA
+            //使能DMA
+            __HAL_DMA_ENABLE(huart1.hdmarx);
+
+						
+						HAL_UART_Receive_DMA(&huart1,(uint8_t*)pc_rx_buf[1], this_time_rx_len);
+						pc_command_unpack((uint8_t*)pc_rx_buf[1], this_time_rx_len);
+						//记录数据接收时间
+						//detect_hook(DBUS_TOE);
+        }
+    } 
+}
 
 

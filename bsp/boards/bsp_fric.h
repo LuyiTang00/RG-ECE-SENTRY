@@ -7,8 +7,8 @@
 //1170 speed level 0 15m/s
 //1265 spedd level 2 22 m/s
 
-#define FRIC_UP 1400
-#define FRIC_DOWN 1265
+#define FRIC_UP 1170
+#define FRIC_DOWN 1170
 #define FRIC_OFF 1000
 
 extern void fric_off(void);

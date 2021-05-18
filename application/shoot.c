@@ -30,6 +30,7 @@
 #include "gimbal_behaviour.h"
 #include "detect_task.h"
 #include "pid.h"
+#include "referee_usart_task.h"
 
 #define shoot_fric1_on(pwm) fric1_on((pwm)) //摩擦轮1pwm宏定义
 #define shoot_fric2_on(pwm) fric2_on((pwm)) //摩擦轮2pwm宏定义
@@ -269,13 +270,19 @@ static void shoot_set_mode(void)
             shoot_control.shoot_mode = SHOOT_BULLET;
         }
     }
-    
-
-
+/*
+    if(shoot_control.shoot_mode > SHOOT_READY_FRIC){ //自动开火指令处理
+		   if(shootCommand == 0xff){
+			 shoot_control.shoot_mode = SHOOT_CONTINUE_BULLET;
+			 }else if(shootCommand == 0x00){
+			 shoot_control.shoot_mode = SHOOT_READY_BULLET;
+			 }
+		}
+	*/
     if(shoot_control.shoot_mode > SHOOT_READY_FRIC)
     {
         //鼠标长按一直进入射击状态 保持连发
-        if ((shoot_control.press_l_time == PRESS_LONG_TIME) || (shoot_control.press_r_time == PRESS_LONG_TIME) || (shoot_control.rc_s_time == RC_S_LONG_TIME))
+        if ((shoot_control.press_l_time == PRESS_LONG_TIME)||(shootCommand == 0xff)|| (shoot_control.press_r_time == PRESS_LONG_TIME) || (shoot_control.rc_s_time == RC_S_LONG_TIME))
         {
             shoot_control.shoot_mode = SHOOT_CONTINUE_BULLET;
         }

@@ -24,13 +24,13 @@
 #include "arm_math.h"
 #include "detect_task.h"
 
-#define POWER_LIMIT         80.0f
-#define WARNING_POWER       40.0f   
-#define WARNING_POWER_BUFF  50.0f   
+#define POWER_LIMIT         10.0f
+#define WARNING_POWER       8.0f   
+#define WARNING_POWER_BUFF  9.0f   
 
-#define NO_JUDGE_TOTAL_CURRENT_LIMIT    64000.0f    //16000 * 4, 
-#define BUFFER_TOTAL_CURRENT_LIMIT      16000.0f
-#define POWER_TOTAL_CURRENT_LIMIT       20000.0f
+#define NO_JUDGE_TOTAL_CURRENT_LIMIT   11000.0f    //16000 * 4, //changed now is 11000*4
+#define BUFFER_TOTAL_CURRENT_LIMIT      4000.0f  // originally 16000 change to 4000 now 
+#define POWER_TOTAL_CURRENT_LIMIT       5000.0f // changed from 20000 to 5000
 
 /**
   * @brief          limit the power, mainly limit motor current
@@ -60,6 +60,7 @@ void chassis_power_control(chassis_move_t *chassis_power_control)
     else
     {
         get_chassis_power_and_buffer(&chassis_power, &chassis_power_buffer);
+			
         // power > 80w and buffer < 60j, because buffer < 60 means power has been more than 80w
         //功率超过80w 和缓冲能量小于60j,因为缓冲能量小于60意味着功率超过80w
         if(chassis_power_buffer < WARNING_POWER_BUFF)
@@ -113,7 +114,6 @@ void chassis_power_control(chassis_move_t *chassis_power_control)
             }
         }
     }
-
     
     total_current = 0.0f;
     //calculate the original motor current set
@@ -122,7 +122,13 @@ void chassis_power_control(chassis_move_t *chassis_power_control)
     {
         total_current += fabs(chassis_power_control->motor_speed_pid[i].out);
     }
-    
+    /*
+		if(chassis_power > 30)
+                {
+                    //scale down
+                    //缩小
+                    total_current_limit = 30/chassis_power * total_current;
+                }*/
 
     if(total_current > total_current_limit)
     {

@@ -30,7 +30,6 @@
 #include "gimbal_behaviour.h"
 #include "detect_task.h"
 #include "pid.h"
-#include "referee_usart_task.h"
 
 #define shoot_fric1_on(pwm) fric1_on((pwm)) //摩擦轮1pwm宏定义
 #define shoot_fric2_on(pwm) fric2_on((pwm)) //摩擦轮2pwm宏定义
@@ -113,25 +112,22 @@ void shoot_init(void)
   * @param[in]      void
   * @retval         返回can控制值
   */
-
-//===============================================
-
 int16_t shoot_control_loop(void)
 {
 
     shoot_set_mode();        //设置状态机
     shoot_feedback_update(); //更新数据
-	
-	
+
+
     if (shoot_control.shoot_mode == SHOOT_STOP)
     {
         //设置拨弹轮的速度
-        shoot_control.speed_set = 0;
+        shoot_control.speed_set = 0.0f;
     }
     else if (shoot_control.shoot_mode == SHOOT_READY_FRIC)
     {
         //设置拨弹轮的速度
-        shoot_control.speed_set = 0;
+        shoot_control.speed_set = 0.0f;
     }
     else if(shoot_control.shoot_mode ==SHOOT_READY_BULLET)
     {
@@ -224,7 +220,7 @@ static void shoot_set_mode(void)
     //处于中档， 可以使用键盘开启摩擦轮
     if (switch_is_mid(shoot_control.shoot_rc->rc.s[SHOOT_RC_MODE_CHANNEL]) && (shoot_control.shoot_rc->key.v & SHOOT_ON_KEYBOARD) && shoot_control.shoot_mode == SHOOT_STOP)
     {
-        shoot_control.shoot_mode = SHOOT_READY_FRIC; 
+        shoot_control.shoot_mode = SHOOT_READY_FRIC;
     }
     //处于中档， 可以使用键盘关闭摩擦轮
     else if (switch_is_mid(shoot_control.shoot_rc->rc.s[SHOOT_RC_MODE_CHANNEL]) && (shoot_control.shoot_rc->key.v & SHOOT_OFF_KEYBOARD) && shoot_control.shoot_mode != SHOOT_STOP)
@@ -234,11 +230,11 @@ static void shoot_set_mode(void)
 
     if(shoot_control.shoot_mode == SHOOT_READY_FRIC && shoot_control.fric1_ramp.out == shoot_control.fric1_ramp.max_value && shoot_control.fric2_ramp.out == shoot_control.fric2_ramp.max_value)
     {
-        shoot_control.shoot_mode = SHOOT_READY_BULLET; //当摩擦轮完成预热
+        shoot_control.shoot_mode = SHOOT_READY_BULLET;
     }
     else if(shoot_control.shoot_mode == SHOOT_READY_BULLET && shoot_control.key == SWITCH_TRIGGER_ON)
     {
-        shoot_control.shoot_mode = SHOOT_READY;  
+        shoot_control.shoot_mode = SHOOT_READY;
     }
     else if(shoot_control.shoot_mode == SHOOT_READY && shoot_control.key == SWITCH_TRIGGER_OFF)
     {
@@ -254,8 +250,8 @@ static void shoot_set_mode(void)
     }
     else if(shoot_control.shoot_mode == SHOOT_DONE)
     {
-			 if(1)  //pr 改动 屏蔽微动开关
-       // if(shoot_control.key == SWITCH_TRIGGER_OFF)
+        //if(shoot_control.key == SWITCH_TRIGGER_OFF)  //orig
+			  if(1)
         {
             shoot_control.key_time++;
             if(shoot_control.key_time > SHOOT_DONE_KEY_OFF_TIME)
@@ -270,19 +266,13 @@ static void shoot_set_mode(void)
             shoot_control.shoot_mode = SHOOT_BULLET;
         }
     }
-/*
-    if(shoot_control.shoot_mode > SHOOT_READY_FRIC){ //自动开火指令处理
-		   if(shootCommand == 0xff){
-			 shoot_control.shoot_mode = SHOOT_CONTINUE_BULLET;
-			 }else if(shootCommand == 0x00){
-			 shoot_control.shoot_mode = SHOOT_READY_BULLET;
-			 }
-		}
-	*/
+    
+
+
     if(shoot_control.shoot_mode > SHOOT_READY_FRIC)
     {
         //鼠标长按一直进入射击状态 保持连发
-        if ((shoot_control.press_l_time == PRESS_LONG_TIME)||(shootCommand == 0xff)|| (shoot_control.press_r_time == PRESS_LONG_TIME) || (shoot_control.rc_s_time == RC_S_LONG_TIME))
+        if ((shoot_control.press_l_time == PRESS_LONG_TIME) || (shoot_control.press_r_time == PRESS_LONG_TIME) || (shoot_control.rc_s_time == RC_S_LONG_TIME))
         {
             shoot_control.shoot_mode = SHOOT_CONTINUE_BULLET;
         }
@@ -350,8 +340,8 @@ static void shoot_feedback_update(void)
 
     //计算输出轴角度
     shoot_control.angle = (shoot_control.ecd_count * ECD_RANGE + shoot_control.shoot_motor_measure->ecd) * MOTOR_ECD_TO_ANGLE;
-    //微动开关 
-//    shoot_control.key = BUTTEN_TRIG_PIN;  //PR测试注释掉微动开关
+    //微动开关
+    //shoot_control.key = BUTTEN_TRIG_PIN; //COMMENT OUT
     //鼠标按键
     shoot_control.last_press_l = shoot_control.press_l;
     shoot_control.last_press_r = shoot_control.press_r;
@@ -460,10 +450,11 @@ static void shoot_bullet_control(void)
     }
     if(shoot_control.key == SWITCH_TRIGGER_OFF)
     {
+
         shoot_control.shoot_mode = SHOOT_DONE;
     }
     //到达角度判断
-    if (rad_format(shoot_control.set_angle - shoot_control.angle) > 0.15f) //pr改动前为0.05f
+    if (rad_format(shoot_control.set_angle - shoot_control.angle) > 0.15f)//ORIG 0.05
     {
         //没到达一直设置旋转速度
         shoot_control.trigger_speed_set = TRIGGER_SPEED;
@@ -472,8 +463,7 @@ static void shoot_bullet_control(void)
     else
     {
         shoot_control.move_flag = 0;
-			  shoot_control.shoot_mode = SHOOT_DONE; //pr test
+        shoot_control.shoot_mode = SHOOT_DONE;//changed
     }
-   
 }
 

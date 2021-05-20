@@ -31,24 +31,6 @@
 #include "CAN_receive.h"
 #include "pid.h"
 #include "remote_control.h"
-
-
-//yaw speed close-loop PID params, max out and max iout
-//yaw 速度环 PID参数以及 PID最大输出，积分输出
-#define YAW_SPEED_PID_KP        4000.0f
-#define YAW_SPEED_PID_KI        1.0f//
-#define YAW_SPEED_PID_KD        0.1f//
-#define YAW_SPEED_PID_MAX_OUT   30000.0f
-#define YAW_SPEED_PID_MAX_IOUT  5000.0f
-
-//yaw gyro angle close-loop PID params, max out and max iout
-//yaw 角度环 角度由陀螺仪解算 PID参数以及 PID最大输出，积分输出
-#define YAW_GYRO_ABSOLUTE_PID_KP        20.0f //26.0f
-#define YAW_GYRO_ABSOLUTE_PID_KI        0.02f
-#define YAW_GYRO_ABSOLUTE_PID_KD        0.1f //
-#define YAW_GYRO_ABSOLUTE_PID_MAX_OUT   10.0f
-#define YAW_GYRO_ABSOLUTE_PID_MAX_IOUT  1.0f
-
 //pitch speed close-loop PID params, max out and max iout
 //pitch 速度环 PID参数以及 PID最大输出，积分输出
 #define PITCH_SPEED_PID_KP        3600.0f
@@ -56,6 +38,14 @@
 #define PITCH_SPEED_PID_KD        0.0f
 #define PITCH_SPEED_PID_MAX_OUT   30000.0f
 #define PITCH_SPEED_PID_MAX_IOUT  10000.0f
+
+//yaw speed close-loop PID params, max out and max iout
+//yaw 速度环 PID参数以及 PID最大输出，积分输出
+#define YAW_SPEED_PID_KP        4000.0f
+#define YAW_SPEED_PID_KI        1.0f
+#define YAW_SPEED_PID_KD        0.1f
+#define YAW_SPEED_PID_MAX_OUT   30000.0f
+#define YAW_SPEED_PID_MAX_IOUT  5000.0f
 
 //pitch gyro angle close-loop PID params, max out and max iout
 //pitch 角度环 角度由陀螺仪解算 PID参数以及 PID最大输出，积分输出
@@ -66,10 +56,18 @@
 #define PITCH_GYRO_ABSOLUTE_PID_MAX_OUT 10.0f
 #define PITCH_GYRO_ABSOLUTE_PID_MAX_IOUT 0.0f
 
+//yaw gyro angle close-loop PID params, max out and max iout
+//yaw 角度环 角度由陀螺仪解算 PID参数以及 PID最大输出，积分输出
+#define YAW_GYRO_ABSOLUTE_PID_KP        10.0f
+#define YAW_GYRO_ABSOLUTE_PID_KI        0.0f
+#define YAW_GYRO_ABSOLUTE_PID_KD        0.3f
+#define YAW_GYRO_ABSOLUTE_PID_MAX_OUT   10.0f
+#define YAW_GYRO_ABSOLUTE_PID_MAX_IOUT  0.0f
+
 //pitch encode angle close-loop PID params, max out and max iout
 //pitch 角度环 角度由编码器 PID参数以及 PID最大输出，积分输出
 #define PITCH_ENCODE_RELATIVE_PID_KP 15.0f
-#define PITCH_ENCODE_RELATIVE_PID_KI 0.00f
+#define PITCH_ENCODE_RELATIVE_PID_KI 2.00f
 #define PITCH_ENCODE_RELATIVE_PID_KD 0.0f
 
 #define PITCH_ENCODE_RELATIVE_PID_MAX_OUT 10.0f
@@ -77,7 +75,7 @@
 
 //yaw encode angle close-loop PID params, max out and max iout
 //yaw 角度环 角度由编码器 PID参数以及 PID最大输出，积分输出
-#define YAW_ENCODE_RELATIVE_PID_KP        8.0f 
+#define YAW_ENCODE_RELATIVE_PID_KP        8.0f
 #define YAW_ENCODE_RELATIVE_PID_KI        0.0f
 #define YAW_ENCODE_RELATIVE_PID_KD        0.0f
 #define YAW_ENCODE_RELATIVE_PID_MAX_OUT   10.0f
@@ -108,7 +106,7 @@
 #define PITCH_RC_SEN  -0.000006f //0.005
 
 #define YAW_MOUSE_SEN   0.00005f
-#define PITCH_MOUSE_SEN 0.00005f //0.00015
+#define PITCH_MOUSE_SEN 0.00015f
 
 #define YAW_ENCODE_SEN    0.01f
 #define PITCH_ENCODE_SEN  0.01f
@@ -119,8 +117,8 @@
 //云台测试模式 宏定义 0 为不使用测试模式
 #define GIMBAL_TEST_MODE 0
 
-#define PITCH_TURN  0
-#define YAW_TURN    0
+#define PITCH_TURN  1
+#define YAW_TURN    1
 
 //电机码盘值最大以及中值
 #define HALF_ECD_RANGE  4096
@@ -256,13 +254,7 @@ extern const gimbal_motor_t *get_yaw_motor_point(void);
   * @param[in]      none
   * @retval         pitch
   */
-	
 extern const gimbal_motor_t *get_pitch_motor_point(void);
-
-/** PR test 2021/4/3, 返回云台指针
-*
-*/
-extern gimbal_control_t *get_gimbal_pointer(void);
 
 /**
   * @brief          gimbal task, osDelay GIMBAL_CONTROL_TIME (1ms) 
@@ -322,4 +314,6 @@ extern bool_t cmd_cali_gimbal_hook(uint16_t *yaw_offset, uint16_t *pitch_offset,
   * @waring         这个函数使用到gimbal_control 静态变量导致函数不适用以上通用指针复用
   */
 extern void set_cali_gimbal_hook(const uint16_t yaw_offset, const uint16_t pitch_offset, const fp32 max_yaw, const fp32 min_yaw, const fp32 max_pitch, const fp32 min_pitch);
+
+gimbal_control_t* get_gimbal_pointer(void);
 #endif

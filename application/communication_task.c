@@ -3,43 +3,32 @@
 #include "gimbal_task.h"
 #include "bsp_usart.h"
 #include "arm_math.h"
-#include "user_lib.h"
 #include "main.h"
+#include "usart.h"
 
 
-extern UART_HandleTypeDef huart1;
 extern DMA_HandleTypeDef hdma_usart1_rx;
 extern DMA_HandleTypeDef hdma_usart1_tx;
-
 
 #define PC_RX_BUF_NUM 50
 static uint8_t pc_rx_buf[2][PC_RX_BUF_NUM];
 
- gimbal_control_t* p_gimbal_control = NULL;
-
-struct gimbal_cmd gimbal_cmd_t;
+gimbal_control_t* p_gimbal_control = NULL;
 
 
 void pc_control_init(void)
 {
     usart1_init(pc_rx_buf[0], pc_rx_buf[1], PC_RX_BUF_NUM);
-
-	  p_gimbal_control = get_gimbal_pointer();
-
+		p_gimbal_control = get_gimbal_pointer();
 }
 
 
 static void pc_command_unpack(uint8_t *buf, uint16_t len)
 {
-	if (buf[0] == 0xaf) {
-		if (buf[1] == GIMBAL_MOVEMENT) {
-			memcpy(&gimbal_cmd_t, buf, sizeof(gimbal_cmd_t));
-			fp32 yaw = rad_format((fp32)gimbal_cmd_t.yaw/10000);
-			fp32 pitch = rad_format((fp32)gimbal_cmd_t.pitch/10000);
-			p_gimbal_control->gimbal_yaw_motor.absolute_angle_set = rad_format(p_gimbal_control->gimbal_yaw_motor.absolute_angle + yaw);
-			p_gimbal_control->gimbal_pitch_motor.absolute_angle_set = rad_format(p_gimbal_control->gimbal_pitch_motor.absolute_angle + pitch);
-		}
-	}
+	fp32 yaw = -0.1f;
+	fp32 pitch = 0.0f;
+	//gimbal_behaviour_control_set(&yaw, &pitch, p_gimbal_control);
+	p_gimbal_control->gimbal_yaw_motor.absolute_angle_set = p_gimbal_control->gimbal_yaw_motor.absolute_angle_set + yaw;
 }
 
 //´®¿ÚÖÐ¶Ï
@@ -116,6 +105,5 @@ void USART1_IRQHandler(void)
     }
 
 }
-
 
 

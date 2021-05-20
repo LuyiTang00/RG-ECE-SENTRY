@@ -45,10 +45,10 @@
 #define CHASSIS_MODE_CHANNEL 0
 //rocker value (max 660) change to vertial speed (m/s) 
 //遥控器前进摇杆（max 660）转化成车体前进速度（m/s）的比例
-#define CHASSIS_VX_RC_SEN 0.006f
+#define CHASSIS_VX_RC_SEN 0.0f//0.006
 //rocker value (max 660) change to horizontal speed (m/s)
 //遥控器左右摇杆（max 660）转化成车体左右速度（m/s）的比例
-#define CHASSIS_VY_RC_SEN 0.005f
+#define CHASSIS_VY_RC_SEN 0.012f//0.005
 //in following yaw angle mode, rocker value add to angle 
 //跟随底盘yaw模式下，遥控器的yaw遥杆（max 660）增加到车体角度的比例
 #define CHASSIS_ANGLE_Z_RC_SEN 0.000002f
@@ -68,7 +68,7 @@
 #define MOTOR_SPEED_TO_CHASSIS_SPEED_WZ 0.25f
 
 
-#define MOTOR_DISTANCE_TO_CENTER 0.2f
+#define MOTOR_DISTANCE_TO_CENTER 0.2f//0.2
 
 //chassis task control time  2ms
 //底盘任务控制间隔 2ms
@@ -102,10 +102,10 @@
 #define MAX_WHEEL_SPEED 4.0f
 //chassis forward or back max speed
 //底盘运动过程最大前进速度
-#define NORMAL_MAX_CHASSIS_SPEED_X 3.0f //PR test 2.0
+#define NORMAL_MAX_CHASSIS_SPEED_X 2.0f //2f orignially
 //chassis left or right max speed
 //底盘运动过程最大平移速度
-#define NORMAL_MAX_CHASSIS_SPEED_Y 1.5f
+#define NORMAL_MAX_CHASSIS_SPEED_Y 2.5f //1.5 org
 
 #define CHASSIS_WZ_SET_SCALE 0.1f
 
@@ -118,16 +118,16 @@
 
 //chassis motor speed PID
 //底盘电机速度环PID
-#define M3505_MOTOR_SPEED_PID_KP 5000.0f
+#define M3505_MOTOR_SPEED_PID_KP 15000.0f
 #define M3505_MOTOR_SPEED_PID_KI 10.0f
 #define M3505_MOTOR_SPEED_PID_KD 0.0f
 #define M3505_MOTOR_SPEED_PID_MAX_OUT MAX_MOTOR_CAN_CURRENT
 #define M3505_MOTOR_SPEED_PID_MAX_IOUT 2000.0f
 
 //chassis follow angle PID
-//底盘旋转跟随PID	
-#define CHASSIS_FOLLOW_GIMBAL_PID_KP 25.0f //40.0f  //Pr
-#define CHASSIS_FOLLOW_GIMBAL_PID_KI 0.001f
+//底盘旋转跟随PID
+#define CHASSIS_FOLLOW_GIMBAL_PID_KP 20.0f
+#define CHASSIS_FOLLOW_GIMBAL_PID_KI 0.0f
 #define CHASSIS_FOLLOW_GIMBAL_PID_KD 0.0f
 #define CHASSIS_FOLLOW_GIMBAL_PID_MAX_OUT 6.0f
 #define CHASSIS_FOLLOW_GIMBAL_PID_MAX_IOUT 0.2f

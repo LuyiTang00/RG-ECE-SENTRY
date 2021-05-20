@@ -59,8 +59,6 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define BUTTON_TRIG_Pin GPIO_PIN_7
-#define BUTTON_TRIG_GPIO_Port GPIOI
 #define RSTN_IST8310_Pin GPIO_PIN_6
 #define RSTN_IST8310_GPIO_Port GPIOG
 #define LED_R_Pin GPIO_PIN_12
@@ -97,7 +95,8 @@ void Error_Handler(void);
 #define CS1_GYRO_Pin GPIO_PIN_0
 #define CS1_GYRO_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
-
+#define sensora_Pin GPIO_PIN_7
+#define sensorb_Pin GPIO_PIN_6
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

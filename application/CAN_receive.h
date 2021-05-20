@@ -29,13 +29,12 @@
 /* CAN send and receive ID */
 typedef enum
 {
-	//CAN1
     CAN_CHASSIS_ALL_ID = 0x200,
     CAN_3508_M1_ID = 0x201,
     CAN_3508_M2_ID = 0x202,
     CAN_3508_M3_ID = 0x203,
     CAN_3508_M4_ID = 0x204,
-	//CAN2
+
     CAN_YAW_MOTOR_ID = 0x205,
     CAN_PIT_MOTOR_ID = 0x206,
     CAN_TRIGGER_MOTOR_ID = 0x207,
@@ -70,15 +69,10 @@ typedef struct
   * @param[in]      rev: (0x208) 保留，电机控制电流
   * @retval         none
   */
-extern void CAN_cmd_gimbal(int16_t pitch, int16_t rev);
+extern void CAN_cmd_gimbal(int16_t yaw, int16_t pitch, int16_t shoot, int16_t rev);
 
-/**
-  * @brief          发送电机控制电流(0x207)
-  * @param[in]      shoot: (0x207) 2006电机控制电流, 范围 [-10000,10000]
-	* @param[in]      yaw: (0x205) 6020电机控制电流, 范围 [-30000,30000]
-  * @retval         none
-  */
-extern void CAN_cmd_gimbal2(int16_t shoot,int16_t yaw);
+
+extern void CAN_cmd_gimbal2(int16_t shoot);
 /**
   * @brief          send CAN packet of ID 0x700, it will set chassis motor 3508 to quick ID setting
   * @param[in]      none
@@ -109,19 +103,6 @@ extern void CAN_cmd_chassis_reset_ID(void);
   */
 extern void CAN_cmd_chassis(int16_t motor1, int16_t motor2, int16_t motor3, int16_t motor4);
 
-/**
-  * @brief          send control current of motor (0x208,0x209)
-  * @param[in]      motor1: (0x208) 3508 motor control current, range [-16384,16384] 
-  * @param[in]      motor2: (0x209) 3508 motor control current, range [-16384,16384] 
-  * @retval         none
-  */
-/**
-  * @brief          发送电机控制电流(0x208,0x209)
-  * @param[in]      motor1: (0x208) 3508电机控制电流, 范围 [-16384,16384]
-  * @param[in]      motor2: (0x209) 3508电机控制电流, 范围 [-16384,16384]
-  * @retval         none
-  */
-extern void CAN_cmd_friction_wheel(int16_t motor1, int16_t motor2);
 /**
   * @brief          return the yaw 6020 motor data point
   * @param[in]      none

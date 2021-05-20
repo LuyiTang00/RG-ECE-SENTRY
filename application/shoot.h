@@ -69,7 +69,7 @@
 #define REVERSE_SPEED_LIMIT         13.0f
 
 #define PI_FOUR                     0.78539816339744830961566084581988f
-#define PI_TEN                      0.69f//initial 0.314 radian,0.69 is approximately 40 degree
+#define PI_TEN                      0.314f
 
 //拨弹轮电机PID
 #define TRIGGER_ANGLE_PID_KP        800.0f
@@ -88,12 +88,12 @@
 typedef enum
 {
     SHOOT_STOP = 0,
-    SHOOT_READY_FRIC,    //1
-    SHOOT_READY_BULLET,  //2
-    SHOOT_READY,         //3
-    SHOOT_BULLET,        //4
-    SHOOT_CONTINUE_BULLET,  //5
-    SHOOT_DONE,          //6
+    SHOOT_READY_FRIC,
+    SHOOT_READY_BULLET,
+    SHOOT_READY,
+    SHOOT_BULLET,
+    SHOOT_CONTINUE_BULLET,
+    SHOOT_DONE,
 } shoot_mode_e;
 
 
@@ -133,9 +133,6 @@ typedef struct
     uint16_t heat_limit;
     uint16_t heat;
 } shoot_control_t;
-
-extern uint8_t shootCommand; //自动开火指令  0x00 = 停火  0xff = 开火
-
 
 //由于射击和云台使用同一个can的id故也射击任务在云台任务中执行
 extern void shoot_init(void);

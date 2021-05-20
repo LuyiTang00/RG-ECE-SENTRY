@@ -25,7 +25,7 @@
 #include "cmsis_os.h"
 
 /* Private includes ----------------------------------------------------------*/
-/* USER CODE BEGIN Includes */
+/* USER CODE BEGIN Includes */     
 
 #include "calibrate_task.h"
 #include "chassis_task.h"
@@ -38,8 +38,6 @@
 #include "usb_task.h"
 #include "voltage_task.h"
 #include "servo_task.h"
-
-
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -176,7 +174,7 @@ void MX_FREERTOS_Init(void) {
 
     osThreadDef(REFEREE, referee_usart_task, osPriorityNormal, 0, 128);
     referee_usart_task_handle = osThreadCreate(osThread(REFEREE), NULL);
-		
+
 
     osThreadDef(USBTask, usb_task, osPriorityNormal, 0, 128);
     usb_task_handle = osThreadCreate(osThread(USBTask), NULL);
@@ -204,7 +202,6 @@ __weak void test_task(void const * argument)
 {
   /* init code for USB_DEVICE */
   MX_USB_DEVICE_Init();
-
   /* USER CODE BEGIN test_task */
   /* Infinite loop */
   for(;;)

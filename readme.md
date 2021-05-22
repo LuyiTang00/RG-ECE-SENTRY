@@ -7,12 +7,13 @@
     速度变量尚未确定。
     速度变量与比例的乘数未确定。必须通过测试得知。
     理想效果是机器人自动左右行走
+
  -5/22/2021 [Elin]
-    在chassis_behavior.h里添加了stm32f4xx gal gpio头文件，HAL_GPIO_ReadPin()已经不报错了，但是不知道为什么编译时间大大增加了。
+    在chassis_behavior.h里添加了stm32f4xx hal gpio头文件，HAL_GPIO_ReadPin()已经不报错了，但是不知道为什么编译时间大大增加了。
     修改了几个变量的声明，优化成了u8， u32
 
 ##此次目标
-
+   
 
 ## 概述
 

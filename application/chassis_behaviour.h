@@ -2,7 +2,7 @@
   ****************************(C) COPYRIGHT 2019 DJI****************************
   * @file       chassis_behaviour.c/h
   * @brief      according to remote control, change the chassis behaviour.
-  *             ¸ù¾ÝÒ£¿ØÆ÷µÄÖµ£¬¾ö¶¨µ×ÅÌÐÐÎª¡£
+  *             ï¿½ï¿½ï¿½ï¿½Ò£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½
   * @note       
   * @history
   *  Version    Date            Author          Modification
@@ -44,31 +44,31 @@
         {
             chassis_xxx_xxx_control(vx_set, vy_set, angle_set, chassis_move_rc_to_vector);
         }
-    Èç¹ûÒªÌí¼ÓÒ»¸öÐÂµÄÐÐÎªÄ£Ê½
-    1.Ê×ÏÈ£¬ÔÚchassis_behaviour.hÎÄ¼þÖÐ£¬ Ìí¼ÓÒ»¸öÐÂÐÐÎªÃû×ÖÔÚ chassis_behaviour_e
+    ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Âµï¿½ï¿½ï¿½ÎªÄ£Ê½
+    1.ï¿½ï¿½ï¿½È£ï¿½ï¿½ï¿½chassis_behaviour.hï¿½Ä¼ï¿½ï¿½Ð£ï¿½ ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ chassis_behaviour_e
     erum
     {  
         ...
         ...
-        CHASSIS_XXX_XXX, // ÐÂÌí¼ÓµÄ
+        CHASSIS_XXX_XXX, // ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½
     }chassis_behaviour_e,
 
-    2. ÊµÏÖÒ»¸öÐÂµÄº¯Êý chassis_xxx_xxx_control(fp32 *vx, fp32 *vy, fp32 *wz, chassis_move_t * chassis )
-        "vx,vy,wz" ²ÎÊýÊÇµ×ÅÌÔË¶¯¿ØÖÆÊäÈëÁ¿
-        µÚÒ»¸ö²ÎÊý: 'vx' Í¨³£¿ØÖÆ×ÝÏòÒÆ¶¯,ÕýÖµ Ç°½ø£¬ ¸ºÖµ ºóÍË
-        µÚ¶þ¸ö²ÎÊý: 'vy' Í¨³£¿ØÖÆºáÏòÒÆ¶¯,ÕýÖµ ×óÒÆ, ¸ºÖµ ÓÒÒÆ
-        µÚÈý¸ö²ÎÊý: 'wz' ¿ÉÄÜÊÇ½Ç¶È¿ØÖÆ»òÕßÐý×ªËÙ¶È¿ØÖÆ
-        ÔÚÕâ¸öÐÂµÄº¯Êý, ÄãÄÜ¸ø "vx","vy",and "wz" ¸³ÖµÏëÒªµÄËÙ¶È²ÎÊý
-    3.  ÔÚ"chassis_behaviour_mode_set"Õâ¸öº¯ÊýÖÐ£¬Ìí¼ÓÐÂµÄÂß¼­ÅÐ¶Ï£¬¸øchassis_behaviour_mode¸³Öµ³ÉCHASSIS_XXX_XXX
-        ÔÚº¯Êý×îºó£¬Ìí¼Ó"else if(chassis_behaviour_mode == CHASSIS_XXX_XXX)" ,È»ºóÑ¡ÔñÒ»ÖÖµ×ÅÌ¿ØÖÆÄ£Ê½
-        4ÖÖ:
-        CHASSIS_VECTOR_FOLLOW_GIMBAL_YAW : 'vx' and 'vy'ÊÇËÙ¶È¿ØÖÆ£¬ 'wz'ÊÇ½Ç¶È¿ØÖÆ ÔÆÌ¨ºÍµ×ÅÌµÄÏà¶Ô½Ç¶È
-        Äã¿ÉÒÔÃüÃû³É"xxx_angle_set"¶ø²»ÊÇ'wz'
-        CHASSIS_VECTOR_FOLLOW_CHASSIS_YAW : 'vx' and 'vy'ÊÇËÙ¶È¿ØÖÆ£¬ 'wz'ÊÇ½Ç¶È¿ØÖÆ µ×ÅÌµÄÍÓÂÝÒÇ¼ÆËã³öµÄ¾ø¶Ô½Ç¶È
-        Äã¿ÉÒÔÃüÃû³É"xxx_angle_set"
-        CHASSIS_VECTOR_NO_FOLLOW_YAW : 'vx' and 'vy'ÊÇËÙ¶È¿ØÖÆ£¬ 'wz'ÊÇÐý×ªËÙ¶È¿ØÖÆ
-        CHASSIS_VECTOR_RAW : Ê¹ÓÃ'vx' 'vy' and 'wz'Ö±½ÓÏßÐÔ¼ÆËã³ö³µÂÖµÄµçÁ÷Öµ£¬µçÁ÷Öµ½«Ö±½Ó·¢ËÍµ½can ×ÜÏßÉÏ
-    4.  ÔÚ"chassis_behaviour_control_set" º¯ÊýµÄ×îºó£¬Ìí¼Ó
+    2. Êµï¿½ï¿½Ò»ï¿½ï¿½ï¿½ÂµÄºï¿½ï¿½ï¿½ chassis_xxx_xxx_control(fp32 *vx, fp32 *vy, fp32 *wz, chassis_move_t * chassis )
+        "vx,vy,wz" ï¿½ï¿½ï¿½ï¿½ï¿½Çµï¿½ï¿½ï¿½ï¿½Ë¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½: 'vx' Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½,ï¿½ï¿½Öµ Ç°ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Öµ ï¿½ï¿½ï¿½ï¿½
+        ï¿½Ú¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½: 'vy' Í¨ï¿½ï¿½ï¿½ï¿½ï¿½Æºï¿½ï¿½ï¿½ï¿½Æ¶ï¿½,ï¿½ï¿½Öµ ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½Öµ ï¿½ï¿½ï¿½ï¿½
+        ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½: 'wz' ï¿½ï¿½ï¿½ï¿½ï¿½Ç½Ç¶È¿ï¿½ï¿½Æ»ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½Ù¶È¿ï¿½ï¿½ï¿½
+        ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÂµÄºï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½Ü¸ï¿½ "vx","vy",and "wz" ï¿½ï¿½Öµï¿½ï¿½Òªï¿½ï¿½ï¿½Ù¶È²ï¿½ï¿½ï¿½
+    3.  ï¿½ï¿½"chassis_behaviour_mode_set"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Âµï¿½ï¿½ß¼ï¿½ï¿½Ð¶Ï£ï¿½ï¿½ï¿½chassis_behaviour_modeï¿½ï¿½Öµï¿½ï¿½CHASSIS_XXX_XXX
+        ï¿½Úºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"else if(chassis_behaviour_mode == CHASSIS_XXX_XXX)" ,È»ï¿½ï¿½Ñ¡ï¿½ï¿½Ò»ï¿½Öµï¿½ï¿½Ì¿ï¿½ï¿½ï¿½Ä£Ê½
+        4ï¿½ï¿½:
+        CHASSIS_VECTOR_FOLLOW_GIMBAL_YAW : 'vx' and 'vy'ï¿½ï¿½ï¿½Ù¶È¿ï¿½ï¿½Æ£ï¿½ 'wz'ï¿½Ç½Ç¶È¿ï¿½ï¿½ï¿½ ï¿½ï¿½Ì¨ï¿½Íµï¿½ï¿½Ìµï¿½ï¿½ï¿½Ô½Ç¶ï¿½
+        ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"xxx_angle_set"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'wz'
+        CHASSIS_VECTOR_FOLLOW_CHASSIS_YAW : 'vx' and 'vy'ï¿½ï¿½ï¿½Ù¶È¿ï¿½ï¿½Æ£ï¿½ 'wz'ï¿½Ç½Ç¶È¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¼ï¿½ï¿½ï¿½ï¿½ï¿½Ä¾ï¿½ï¿½Ô½Ç¶ï¿½
+        ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"xxx_angle_set"
+        CHASSIS_VECTOR_NO_FOLLOW_YAW : 'vx' and 'vy'ï¿½ï¿½ï¿½Ù¶È¿ï¿½ï¿½Æ£ï¿½ 'wz'ï¿½ï¿½ï¿½ï¿½×ªï¿½Ù¶È¿ï¿½ï¿½ï¿½
+        CHASSIS_VECTOR_RAW : Ê¹ï¿½ï¿½'vx' 'vy' and 'wz'Ö±ï¿½ï¿½ï¿½ï¿½ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÖµÄµï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½Ö±ï¿½Ó·ï¿½ï¿½Íµï¿½can ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    4.  ï¿½ï¿½"chassis_behaviour_control_set" ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         else if(chassis_behaviour_mode == CHASSIS_XXX_XXX)
         {
             chassis_xxx_xxx_control(vx_set, vy_set, angle_set, chassis_move_rc_to_vector);
@@ -82,25 +82,25 @@
 #define CHASSIS_BEHAVIOUR_H
 #include "struct_typedef.h"
 #include "chassis_task.h"
-#include "stm32f4xx_hal_gpio.h"
+//#include "stm32f4xx_hal_gpio.h"
 
 typedef enum
 {
-  CHASSIS_ZERO_FORCE,                   //chassis will be like no power,µ×ÅÌÎÞÁ¦, ¸úÃ»ÉÏµçÄÇÑù
-  CHASSIS_NO_MOVE,                      //chassis will be stop,µ×ÅÌ±£³Ö²»¶¯
-  CHASSIS_INFANTRY_FOLLOW_GIMBAL_YAW,   //chassis will follow gimbal, usually in infantry,Õý³£²½±øµ×ÅÌ¸úËæÔÆÌ¨
+  CHASSIS_ZERO_FORCE,                   //chassis will be like no power,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½Ã»ï¿½Ïµï¿½ï¿½ï¿½ï¿½ï¿½
+  CHASSIS_NO_MOVE,                      //chassis will be stop,ï¿½ï¿½ï¿½Ì±ï¿½ï¿½Ö²ï¿½ï¿½ï¿½
+  CHASSIS_INFANTRY_FOLLOW_GIMBAL_YAW,   //chassis will follow gimbal, usually in infantry,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ï¿½ï¿½ï¿½ï¿½Ì¨
   CHASSIS_ENGINEER_FOLLOW_CHASSIS_YAW,  //chassis will follow chassis yaw angle, usually in engineer,
                                         //because chassis does have gyro sensor, its yaw angle is calculed by gyro in gimbal and gimbal motor angle,
                                         //if you have a gyro sensor in chassis, please updata yaw, pitch, roll angle in "chassis_feedback_update"  function
-                                        //¹¤³Ìµ×ÅÌ½Ç¶È¿ØÖÆµ×ÅÌ£¬ÓÉÓÚµ×ÅÌÎ´ÓÐÍÓÂÝÒÇ£¬¹Ê¶ø½Ç¶ÈÊÇ¼õÈ¥ÔÆÌ¨½Ç¶È¶øµÃµ½£¬
-                                        //Èç¹ûÓÐµ×ÅÌÍÓÂÝÒÇÇë¸üÐÂµ×ÅÌµÄyaw£¬pitch£¬roll½Ç¶È ÔÚchassis_feedback_updateº¯ÊýÖÐ
+                                        //ï¿½ï¿½ï¿½Ìµï¿½ï¿½Ì½Ç¶È¿ï¿½ï¿½Æµï¿½ï¿½Ì£ï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½Î´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç£ï¿½ï¿½Ê¶ï¿½ï¿½Ç¶ï¿½ï¿½Ç¼ï¿½È¥ï¿½ï¿½Ì¨ï¿½Ç¶È¶ï¿½ï¿½Ãµï¿½ï¿½ï¿½
+                                        //ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Âµï¿½ï¿½Ìµï¿½yawï¿½ï¿½pitchï¿½ï¿½rollï¿½Ç¶ï¿½ ï¿½ï¿½chassis_feedback_updateï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
   CHASSIS_NO_FOLLOW_YAW,                //chassis does not follow angle, angle is open-loop,but wheels have closed-loop speed
-                                        //µ×ÅÌ²»¸úËæ½Ç¶È£¬½Ç¶ÈÊÇ¿ª»·µÄ£¬µ«ÂÖ×ÓÊÇÓÐËÙ¶È»·
+                                        //ï¿½ï¿½ï¿½Ì²ï¿½ï¿½ï¿½ï¿½ï¿½Ç¶È£ï¿½ï¿½Ç¶ï¿½ï¿½Ç¿ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶È»ï¿½
   CHASSIS_OPEN                          //the value of remote control will mulitiply a value, get current value that will be sent to can bus
-                                        // Ò£¿ØÆ÷µÄÖµ³ËÒÔ±ÈÀý³ÉµçÁ÷Öµ Ö±½Ó·¢ËÍµ½can×ÜÏßÉÏ
+                                        // Ò£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½Éµï¿½ï¿½ï¿½Öµ Ö±ï¿½Ó·ï¿½ï¿½Íµï¿½canï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 } chassis_behaviour_e;
 
-#define CHASSIS_OPEN_RC_SCALE 10 // in CHASSIS_OPEN mode, multiply the value. ÔÚchassis_open Ä£ÐÍÏÂ£¬Ò£¿ØÆ÷³ËÒÔ¸Ã±ÈÀý·¢ËÍµ½canÉÏ
+#define CHASSIS_OPEN_RC_SCALE 10 // in CHASSIS_OPEN mode, multiply the value. ï¿½ï¿½chassis_open Ä£ï¿½ï¿½ï¿½Â£ï¿½Ò£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¸Ã±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Íµï¿½canï¿½ï¿½
 
 
 
@@ -110,8 +110,8 @@ typedef enum
   * @retval         none
   */
 /**
-  * @brief          Í¨¹ýÂß¼­ÅÐ¶Ï£¬¸³Öµ"chassis_behaviour_mode"³ÉÄÄÖÖÄ£Ê½
-  * @param[in]      chassis_move_mode: µ×ÅÌÊý¾Ý
+  * @brief          Í¨ï¿½ï¿½ï¿½ß¼ï¿½ï¿½Ð¶Ï£ï¿½ï¿½ï¿½Öµ"chassis_behaviour_mode"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£Ê½
+  * @param[in]      chassis_move_mode: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
   * @retval         none
   */
 extern void chassis_behaviour_mode_set(chassis_move_t *chassis_move_mode);
@@ -126,11 +126,11 @@ extern void chassis_behaviour_mode_set(chassis_move_t *chassis_move_mode);
   * @retval         none
   */
 /**
-  * @brief          ÉèÖÃ¿ØÖÆÁ¿.¸ù¾Ý²»Í¬µ×ÅÌ¿ØÖÆÄ£Ê½£¬Èý¸ö²ÎÊý»á¿ØÖÆ²»Í¬ÔË¶¯.ÔÚÕâ¸öº¯ÊýÀïÃæ£¬»áµ÷ÓÃ²»Í¬µÄ¿ØÖÆº¯Êý.
-  * @param[out]     vx_set, Í¨³£¿ØÖÆ×ÝÏòÒÆ¶¯.
-  * @param[out]     vy_set, Í¨³£¿ØÖÆºáÏòÒÆ¶¯.
-  * @param[out]     wz_set, Í¨³£¿ØÖÆÐý×ªÔË¶¯.
-  * @param[in]      chassis_move_rc_to_vector,  °üÀ¨µ×ÅÌËùÓÐÐÅÏ¢.
+  * @brief          ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½ï¿½ï¿½ï¿½.ï¿½ï¿½ï¿½Ý²ï¿½Í¬ï¿½ï¿½ï¿½Ì¿ï¿½ï¿½ï¿½Ä£Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ²ï¿½Í¬ï¿½Ë¶ï¿½.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ£¬ï¿½ï¿½ï¿½ï¿½Ã²ï¿½Í¬ï¿½Ä¿ï¿½ï¿½Æºï¿½ï¿½ï¿½.
+  * @param[out]     vx_set, Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½.
+  * @param[out]     vy_set, Í¨ï¿½ï¿½ï¿½ï¿½ï¿½Æºï¿½ï¿½ï¿½ï¿½Æ¶ï¿½.
+  * @param[out]     wz_set, Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½Ë¶ï¿½.
+  * @param[in]      chassis_move_rc_to_vector,  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢.
   * @retval         none
   */
 

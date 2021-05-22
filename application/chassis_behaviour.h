@@ -82,6 +82,7 @@
 #define CHASSIS_BEHAVIOUR_H
 #include "struct_typedef.h"
 #include "chassis_task.h"
+#include "stm32f4xx_hal_gpio.h"
 
 typedef enum
 {

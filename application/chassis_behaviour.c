@@ -435,10 +435,9 @@ static void chassis_infantry_follow_gimbal_yaw_control(fp32 *vx_set, fp32 *vy_se
     {
         return;
     }
-    int sensor_state_left = 0, sensor_state_right = 0;
-    int direction = -1;
-    int time = 0;
-    
+    u32 sensor_state_left = 0, sensor_state_right = 0;
+    u8 direction = -1;
+    //需要include一些头文件
     sensor_state_left = HAL_GPIO_ReadPin(GPIOI, GPIO_PIN_6);
     sensor_state_right= HAL_GPIO_ReadPin(GPIOI, GPIO_PIN_7);
     if(sensor_state_left)
@@ -451,11 +450,11 @@ static void chassis_infantry_follow_gimbal_yaw_control(fp32 *vx_set, fp32 *vy_se
     }
     if(direction == 1)
     {
-       *wz_set = -CHASSIS_WZ_RC_SEN * 5.0f;
+       *wz_set = -CHASSIS_WZ_RC_SEN * 5.0f;//常数不确定
     }
     else
     {
-         *wz_set = CHASSIS_WZ_RC_SEN * 5.0f
+         *wz_set = CHASSIS_WZ_RC_SEN * 5.0f;//常数不确定
     }
     //channel value and keyboard value change to speed set-point, in general
     //遥控器的通道值以及键盘按键 得出 一般情况下的速度设定值

@@ -1,3 +1,19 @@
+
+##更新日志
+ -5/20/2021 [Elin]
+    取消了原有的底盘模式是跟随云台角度模式， 用自动行动模式替代。函数名“chassis_infantry_follow_gimbal_yaw_control”
+    现有的自动模式使用gpio读取红外数据，确定机器人是否在边界，如在边界则换方向。
+    已得出速度变量的比例。
+    速度变量尚未确定。
+    速度变量与比例的乘数未确定。必须通过测试得知。
+    理想效果是机器人自动左右行走
+ -5/22/2021 [Elin]
+    在chassis_behavior.h里添加了stm32f4xx gal gpio头文件，HAL_GPIO_ReadPin()已经不报错了，但是不知道为什么编译时间大大增加了。
+    修改了几个变量的声明，优化成了u8， u32
+
+##此次目标
+
+
 ## 概述
 
 - en doc   [readme](doc/en/readme.md)

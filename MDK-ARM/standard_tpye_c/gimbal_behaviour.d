@@ -8,12 +8,12 @@ standard_tpye_c\gimbal_behaviour.o: ..\application\remote_control.h
 standard_tpye_c\gimbal_behaviour.o: ..\bsp\boards\bsp_rc.h
 standard_tpye_c\gimbal_behaviour.o: ..\components\algorithm\Include\arm_math.h
 standard_tpye_c\gimbal_behaviour.o: ../Drivers/CMSIS/Include/core_cm4.h
-standard_tpye_c\gimbal_behaviour.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+standard_tpye_c\gimbal_behaviour.o: D:\Program Files\KEIL\ARM\ARMCC\Bin\..\include\stdint.h
 standard_tpye_c\gimbal_behaviour.o: ../Drivers/CMSIS/Include/cmsis_version.h
 standard_tpye_c\gimbal_behaviour.o: ../Drivers/CMSIS/Include/cmsis_compiler.h
 standard_tpye_c\gimbal_behaviour.o: ../Drivers/CMSIS/Include/cmsis_armcc.h
-standard_tpye_c\gimbal_behaviour.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
-standard_tpye_c\gimbal_behaviour.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+standard_tpye_c\gimbal_behaviour.o: D:\Program Files\KEIL\ARM\ARMCC\Bin\..\include\string.h
+standard_tpye_c\gimbal_behaviour.o: D:\Program Files\KEIL\ARM\ARMCC\Bin\..\include\math.h
 standard_tpye_c\gimbal_behaviour.o: ..\bsp\boards\bsp_buzzer.h
 standard_tpye_c\gimbal_behaviour.o: ..\application\detect_task.h
 standard_tpye_c\gimbal_behaviour.o: ..\components\algorithm\user_lib.h

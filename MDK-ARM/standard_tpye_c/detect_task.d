@@ -3,8 +3,8 @@ standard_tpye_c\detect_task.o: ..\application\detect_task.h
 standard_tpye_c\detect_task.o: ..\application\struct_typedef.h
 standard_tpye_c\detect_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 standard_tpye_c\detect_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
-standard_tpye_c\detect_task.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
-standard_tpye_c\detect_task.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+standard_tpye_c\detect_task.o: D:\Program Files\KEIL\ARM\ARMCC\Bin\..\include\stddef.h
+standard_tpye_c\detect_task.o: D:\Program Files\KEIL\ARM\ARMCC\Bin\..\include\stdint.h
 standard_tpye_c\detect_task.o: ../Inc/FreeRTOSConfig.h
 standard_tpye_c\detect_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 standard_tpye_c\detect_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h

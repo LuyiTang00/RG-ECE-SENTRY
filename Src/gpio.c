@@ -64,7 +64,8 @@ void MX_GPIO_Init(void)
   /*Configure GPIO pins : PI7 PI6 */
   GPIO_InitStruct.Pin = GPIO_PIN_7|GPIO_PIN_6;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Pull = GPIO_NOPULL; //GPIO_NOPULL
+	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;//try others, maybe we are not using it
   HAL_GPIO_Init(GPIOI, &GPIO_InitStruct);
 
   /*Configure GPIO pin : PtPin */

@@ -1,5 +1,10 @@
 
 ##更新日志
+ -5/24/2021 [Zeyan]
+    added "GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;"
+    "wz" is changed to "vy" and the following macro.
+    added the "testing" global variable
+
  -5/20/2021 [Elin]
     取消了原有的底盘模式是跟随云台角度模式， 用自动行动模式替代。函数名“chassis_infantry_follow_gimbal_yaw_control”
     现有的自动模式使用gpio读取红外数据，确定机器人是否在边界，如在边界则换方向。

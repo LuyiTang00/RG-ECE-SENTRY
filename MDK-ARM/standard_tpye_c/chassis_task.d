@@ -10,8 +10,8 @@ standard_tpye_c\chassis_task.o: ..\components\algorithm\user_lib.h
 standard_tpye_c\chassis_task.o: ..\application\chassis_behaviour.h
 standard_tpye_c\chassis_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 standard_tpye_c\chassis_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
-standard_tpye_c\chassis_task.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
-standard_tpye_c\chassis_task.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+standard_tpye_c\chassis_task.o: D:\Program Files\KEIL\ARM\ARMCC\Bin\..\include\stddef.h
+standard_tpye_c\chassis_task.o: D:\Program Files\KEIL\ARM\ARMCC\Bin\..\include\stdint.h
 standard_tpye_c\chassis_task.o: ../Inc/FreeRTOSConfig.h
 standard_tpye_c\chassis_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 standard_tpye_c\chassis_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
@@ -29,8 +29,8 @@ standard_tpye_c\chassis_task.o: ../Drivers/CMSIS/Include/core_cm4.h
 standard_tpye_c\chassis_task.o: ../Drivers/CMSIS/Include/cmsis_version.h
 standard_tpye_c\chassis_task.o: ../Drivers/CMSIS/Include/cmsis_compiler.h
 standard_tpye_c\chassis_task.o: ../Drivers/CMSIS/Include/cmsis_armcc.h
-standard_tpye_c\chassis_task.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
-standard_tpye_c\chassis_task.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+standard_tpye_c\chassis_task.o: D:\Program Files\KEIL\ARM\ARMCC\Bin\..\include\string.h
+standard_tpye_c\chassis_task.o: D:\Program Files\KEIL\ARM\ARMCC\Bin\..\include\math.h
 standard_tpye_c\chassis_task.o: ..\application\detect_task.h
 standard_tpye_c\chassis_task.o: ..\application\INS_task.h
 standard_tpye_c\chassis_task.o: ..\application\chassis_power_control.h

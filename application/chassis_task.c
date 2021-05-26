@@ -133,6 +133,9 @@ chassis_move_t chassis_move;
   * @param[in]      pvParameters: 空
   * @retval         none
   */
+	
+	uint32_t testing; //testing the sensor
+
 void chassis_task(void const *pvParameters)
 {
     //wait a time 
@@ -150,6 +153,9 @@ void chassis_task(void const *pvParameters)
 
     while (1)
     {
+			testing = HAL_GPIO_ReadPin(GPIOI, GPIO_PIN_6);//Testing the sensor
+			
+			
         //set chassis control mode
         //设置底盘控制模式
         chassis_set_mode(&chassis_move);

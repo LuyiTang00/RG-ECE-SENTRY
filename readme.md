@@ -1,5 +1,11 @@
 
 ##更新日志
+ -5/26/2021 [Zeyan]
+    变量direction转移至全局变量(暂时)
+    "chassis_infantry_follow_gimbal_yaw_control"函数更变
+    从if(sensor_state_left) 更变为 if(sensor_state_left && !sensor_state_right)等等
+    添加direction = 0的状态
+
  -5/24/2021 [Zeyan]
     added "GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;"
     "wz" is changed to "vy" and the following macro.

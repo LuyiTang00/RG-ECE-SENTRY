@@ -429,7 +429,9 @@ static void chassis_no_move_control(fp32 *vx_set, fp32 *vy_set, fp32 *wz_set, ch
   * @retval         返回空
   */
 
-uint32_t testing;
+int direction = -1;
+
+uint16_t outPut = 600;
 
 static void chassis_infantry_follow_gimbal_yaw_control(fp32 *vx_set, fp32 *vy_set, fp32 *wz_set, chassis_move_t *chassis_move_rc_to_vector)
 {
@@ -439,30 +441,37 @@ static void chassis_infantry_follow_gimbal_yaw_control(fp32 *vx_set, fp32 *vy_se
     }
     
     int sensor_state_left = 0, sensor_state_right = 0;
-    int direction = -1;
+    
     sensor_state_left = HAL_GPIO_ReadPin(GPIOI, GPIO_PIN_6);
     sensor_state_right= HAL_GPIO_ReadPin(GPIOI, GPIO_PIN_7);
 		//check perioherals tab
-		
-		testing = GPIOI->IDR;
 
-    if(sensor_state_left)
+    if(sensor_state_left && !sensor_state_right)
     {
       direction = -1;
     }
-    else if(sensor_state_right)
+    else if(sensor_state_right && !sensor_state_left)
     {
       direction = 1;
     }
+		else if(!sensor_state_right && !sensor_state_left)
+		{
+			direction = 0;
+		}
+		
     if(direction == 1)
     {
-       *vy_set = - CHASSIS_VY_RC_SEN * 660.0f;//max常数不确定
+       *vy_set = - CHASSIS_VY_RC_SEN * 800.0f;//max常数不确定
 			//660.0 can be larger
     }
-    else
+    else if(direction == -1)
     {
-       *vy_set = CHASSIS_VY_RC_SEN * 660.0f;//常数不确定
+       *vy_set = CHASSIS_VY_RC_SEN * 800.0f;//常数不确定
     }
+		else if(direction == 0)
+		{
+			 *vy_set = 0;
+		}
     //channel value and keyboard value change to speed set-point, in general
     //遥控器的通道值以及键盘按键 得出 一般情况下的速度设定值
 //    chassis_rc_to_control_vector(vx_set, vy_set, chassis_move_rc_to_vector);

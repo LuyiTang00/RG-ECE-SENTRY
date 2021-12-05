@@ -7,6 +7,7 @@ standard_tpye_c\shoot.o: ..\components\controller\pid.h
 standard_tpye_c\shoot.o: ..\application\remote_control.h
 standard_tpye_c\shoot.o: ..\bsp\boards\bsp_rc.h
 standard_tpye_c\shoot.o: ..\components\algorithm\user_lib.h
+standard_tpye_c\shoot.o: ..\application\referee.h
 standard_tpye_c\shoot.o: ../Inc/main.h
 standard_tpye_c\shoot.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
 standard_tpye_c\shoot.o: ../Inc/stm32f4xx_hal_conf.h
@@ -52,6 +53,7 @@ standard_tpye_c\shoot.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.
 standard_tpye_c\shoot.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h
 standard_tpye_c\shoot.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h
 standard_tpye_c\shoot.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h
+standard_tpye_c\shoot.o: ..\application\protocol\protocol.h
 standard_tpye_c\shoot.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 standard_tpye_c\shoot.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
 standard_tpye_c\shoot.o: ../Inc/FreeRTOSConfig.h
@@ -72,7 +74,6 @@ standard_tpye_c\shoot.o: ..\components\algorithm\Include\arm_math.h
 standard_tpye_c\shoot.o: ../Drivers/CMSIS/Include/core_cm4.h
 standard_tpye_c\shoot.o: D:\Program Files\KEIL\ARM\ARMCC\Bin\..\include\string.h
 standard_tpye_c\shoot.o: D:\Program Files\KEIL\ARM\ARMCC\Bin\..\include\math.h
-standard_tpye_c\shoot.o: ..\application\referee.h
-standard_tpye_c\shoot.o: ..\application\protocol\protocol.h
 standard_tpye_c\shoot.o: ..\application\gimbal_behaviour.h
 standard_tpye_c\shoot.o: ..\application\detect_task.h
+standard_tpye_c\shoot.o: ..\application\referee_usart_task.h

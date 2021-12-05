@@ -24,6 +24,8 @@
 #include "remote_control.h"
 #include "user_lib.h"
 
+#include "referee.h"
+
 
 
 //射击发射开关通道数据
@@ -55,8 +57,8 @@
 #define FULL_COUNT                  18
 //拨弹速度
 #define TRIGGER_SPEED               10.0f
-#define CONTINUE_TRIGGER_SPEED      15.0f
-#define READY_TRIGGER_SPEED         5.0f
+#define CONTINUE_TRIGGER_SPEED      4.1f
+#define READY_TRIGGER_SPEED         3.0f
 
 #define KEY_OFF_JUGUE_TIME          500
 #define SWITCH_TRIGGER_ON           0
@@ -134,8 +136,12 @@ typedef struct
     uint16_t heat;
 } shoot_control_t;
 
+extern uint8_t shootCommand; //自动开火指令  0x00 = 停火  0xff = 开火
+
 //由于射击和云台使用同一个can的id故也射击任务在云台任务中执行
 extern void shoot_init(void);
 extern int16_t shoot_control_loop(void);
+extern ext_game_robot_state_t robot_state;
+extern ext_power_heat_data_t power_heat_data_t;
 
 #endif

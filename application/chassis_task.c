@@ -153,9 +153,6 @@ void chassis_task(void const *pvParameters)
 
     while (1)
     {
-			testing = HAL_GPIO_ReadPin(GPIOI, GPIO_PIN_6);//Testing the sensor
-			
-			
         //set chassis control mode
         //设置底盘控制模式
         chassis_set_mode(&chassis_move);
@@ -171,13 +168,6 @@ void chassis_task(void const *pvParameters)
         //chassis control pid calculate
         //底盘控制PID计算
         chassis_control_loop(&chassis_move);
-					int value = 0;
-		if(HAL_GPIO_ReadPin(GPIOI,GPIO_PIN_7| GPIO_PIN_6)){
-			value = 1;
-		}
-		else{
-			value = 0;
-		}
         //make sure  one motor is online at least, so that the control CAN message can be received
         //确保至少一个电机在线， 这样CAN控制包可以被接收到
        // if (!(toe_is_error(CHASSIS_MOTOR1_TOE) && toe_is_error(CHASSIS_MOTOR2_TOE) && toe_is_error(CHASSIS_MOTOR3_TOE) && toe_is_error(CHASSIS_MOTOR4_TOE)))
@@ -273,7 +263,7 @@ static void chassis_init(chassis_move_t *chassis_move_init)
 
     chassis_move_init->vy_max_speed = NORMAL_MAX_CHASSIS_SPEED_Y;
     chassis_move_init->vy_min_speed = -NORMAL_MAX_CHASSIS_SPEED_Y;
-
+		
     //update data
     //更新一下数据
     chassis_feedback_update(chassis_move_init);
@@ -479,7 +469,7 @@ static void chassis_set_contorl(chassis_move_t *chassis_move_control)
     //follow gimbal mode
     //跟随云台模式
     if (chassis_move_control->chassis_mode == CHASSIS_VECTOR_FOLLOW_GIMBAL_YAW)
-    {
+    {/*
         fp32 sin_yaw = 0.0f, cos_yaw = 0.0f;
         //rotate chassis direction, make sure vertial direction follow gimbal 
         //旋转控制底盘速度方向，保证前进方向是云台方向，有利于运动平稳
@@ -497,7 +487,12 @@ static void chassis_set_contorl(chassis_move_t *chassis_move_control)
         //速度限幅
         chassis_move_control->vx_set = fp32_constrain(chassis_move_control->vx_set, chassis_move_control->vx_min_speed, chassis_move_control->vx_max_speed);
         chassis_move_control->vy_set = fp32_constrain(chassis_move_control->vy_set, chassis_move_control->vy_min_speed, chassis_move_control->vy_max_speed);
-    }
+    
+		*/
+		    chassis_move_control->wz_set = angle_set;
+        chassis_move_control->vx_set = fp32_constrain(vx_set, chassis_move_control->vx_min_speed, chassis_move_control->vx_max_speed);
+        chassis_move_control->vy_set = fp32_constrain(vy_set, chassis_move_control->vy_min_speed, chassis_move_control->vy_max_speed);
+		}
     else if (chassis_move_control->chassis_mode == CHASSIS_VECTOR_FOLLOW_CHASSIS_YAW)
     {
         fp32 delat_angle = 0.0f;
@@ -626,7 +621,7 @@ static void chassis_control_loop(chassis_move_t *chassis_move_control_loop)
 
 
     //功率控制
-    chassis_power_control(chassis_move_control_loop);
+    //chassis_power_control(chassis_move_control_loop);
 
 
     //赋值电流值

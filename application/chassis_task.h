@@ -48,7 +48,7 @@
 #define CHASSIS_VX_RC_SEN 0.0f//0.006
 //rocker value (max 660) change to horizontal speed (m/s)
 //遥控器左右摇杆（max 660）转化成车体左右速度（m/s）的比例
-#define CHASSIS_VY_RC_SEN 0.012f//0.005
+#define CHASSIS_VY_RC_SEN 0.005f//0.005
 //in following yaw angle mode, rocker value add to angle 
 //跟随底盘yaw模式下，遥控器的yaw遥杆（max 660）增加到车体角度的比例
 #define CHASSIS_ANGLE_Z_RC_SEN 0.000002f

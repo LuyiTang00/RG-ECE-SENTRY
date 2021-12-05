@@ -69,3 +69,13 @@ standard_tpye_c\referee_usart_task.o: D:\Program Files\KEIL\ARM\ARMCC\Bin\..\inc
 standard_tpye_c\referee_usart_task.o: D:\Program Files\KEIL\ARM\ARMCC\Bin\..\include\stdlib.h
 standard_tpye_c\referee_usart_task.o: ..\application\protocol\protocol.h
 standard_tpye_c\referee_usart_task.o: ..\application\referee.h
+standard_tpye_c\referee_usart_task.o: ..\application\gimbal_task.h
+standard_tpye_c\referee_usart_task.o: ..\application\CAN_receive.h
+standard_tpye_c\referee_usart_task.o: ..\components\controller\pid.h
+standard_tpye_c\referee_usart_task.o: ..\application\remote_control.h
+standard_tpye_c\referee_usart_task.o: ..\bsp\boards\bsp_rc.h
+standard_tpye_c\referee_usart_task.o: ..\application\gimbal_behaviour.h
+standard_tpye_c\referee_usart_task.o: ..\components\algorithm\Include\arm_math.h
+standard_tpye_c\referee_usart_task.o: ../Drivers/CMSIS/Include/core_cm4.h
+standard_tpye_c\referee_usart_task.o: D:\Program Files\KEIL\ARM\ARMCC\Bin\..\include\math.h
+standard_tpye_c\referee_usart_task.o: ..\components\algorithm\user_lib.h

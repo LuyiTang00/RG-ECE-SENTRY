@@ -24,9 +24,9 @@
 #include "arm_math.h"
 #include "detect_task.h"
 
-#define POWER_LIMIT         10.0f
-#define WARNING_POWER       8.0f   
-#define WARNING_POWER_BUFF  9.0f   
+#define POWER_LIMIT         100.0f
+#define WARNING_POWER       80.0f   
+#define WARNING_POWER_BUFF  90.0f   
 
 #define NO_JUDGE_TOTAL_CURRENT_LIMIT   11000.0f    //16000 * 4, //changed now is 11000*4
 #define BUFFER_TOTAL_CURRENT_LIMIT      4000.0f  // originally 16000 change to 4000 now 

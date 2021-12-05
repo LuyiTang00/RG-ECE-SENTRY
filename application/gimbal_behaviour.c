@@ -80,9 +80,14 @@
   */
 
 #include "gimbal_behaviour.h"
+#include "referee_usart_task.h"
 #include "arm_math.h"
 #include "bsp_buzzer.h"
 #include "detect_task.h"
+#include "cmsis_os.h"
+#include "stm32f4xx.h"                  // Device header
+
+
 
 #include "user_lib.h"
 
@@ -90,6 +95,9 @@
 //当云台在校准, 设置蜂鸣器频率和强度
 #define gimbal_warn_buzzer_on() buzzer_on(31, 20000)
 #define gimbal_warn_buzzer_off() buzzer_off()
+
+#define CHANNEL_MAX 510
+#define TWO_PI 3.141593 * 2
 
 #define int_abs(x) ((x) > 0 ? (x) : (-x))
 /**
@@ -273,8 +281,11 @@ static void gimbal_relative_angle_control(fp32 *yaw, fp32 *pitch, gimbal_control
   */
 static void gimbal_motionless_control(fp32 *yaw, fp32 *pitch, gimbal_control_t *gimbal_control_set);
 
+static void GET_aim_state(autoaim_states *autoaim_state);
 //云台行为状态机
 static gimbal_behaviour_e gimbal_behaviour = GIMBAL_ZERO_FORCE;
+
+autoaim_states  CV_states   = NOT_DETECTED;
 
 /**
   * @brief          the function is called by gimbal_set_mode function in gimbal_task.c
@@ -686,54 +697,49 @@ static void gimbal_cali_control(fp32 *yaw, fp32 *pitch, gimbal_control_t *gimbal
   */
 static void gimbal_absolute_angle_control(fp32 *yaw, fp32 *pitch, gimbal_control_t *gimbal_control_set)
 {
-    if (yaw == NULL || pitch == NULL || gimbal_control_set == NULL)
+    /*
+		if (yaw == NULL || pitch == NULL || gimbal_control_set == NULL)
     {
         return;
     }
-
     static int16_t yaw_channel = 0, pitch_channel = 0;
 
     rc_deadband_limit(gimbal_control_set->gimbal_rc_ctrl->rc.ch[YAW_CHANNEL], yaw_channel, RC_DEADBAND);
     rc_deadband_limit(gimbal_control_set->gimbal_rc_ctrl->rc.ch[PITCH_CHANNEL], pitch_channel, RC_DEADBAND);
-
-    *yaw = yaw_channel * YAW_RC_SEN - gimbal_control_set->gimbal_rc_ctrl->mouse.x * YAW_MOUSE_SEN;
-    *pitch = pitch_channel * PITCH_RC_SEN + gimbal_control_set->gimbal_rc_ctrl->mouse.y * PITCH_MOUSE_SEN;
-
-
+		
+		*yaw = yaw_channel * YAW_RC_SEN - gimbal_control_set->gimbal_rc_ctrl->mouse.x * YAW_MOUSE_SEN;
+		*pitch = pitch_channel * PITCH_RC_SEN - gimbal_control_set->gimbal_rc_ctrl->mouse.y * PITCH_MOUSE_SEN;
+	*/
+	
+	  if (yaw == NULL || pitch == NULL || gimbal_control_set == NULL)	
     {
-        static uint16_t last_turn_keyboard = 0;
-        static uint8_t gimbal_turn_flag = 0;
-        static fp32 gimbal_end_angle = 0.0f;
-
-        if ((gimbal_control_set->gimbal_rc_ctrl->key.v & TURN_KEYBOARD) && !(last_turn_keyboard & TURN_KEYBOARD))
-        {
-            if (gimbal_turn_flag == 0)
-            {
-                gimbal_turn_flag = 1;
-                //保存掉头的目标值
-                gimbal_end_angle = rad_format(gimbal_control_set->gimbal_yaw_motor.absolute_angle + PI);
-            }
-        }
-        last_turn_keyboard = gimbal_control_set->gimbal_rc_ctrl->key.v ;
-
-        if (gimbal_turn_flag)
-        {
-            //不断控制到掉头的目标值，正转，反装是随机
-            if (rad_format(gimbal_end_angle - gimbal_control_set->gimbal_yaw_motor.absolute_angle) > 0.0f)
-            {
-                *yaw += TURN_SPEED;
-            }
-            else
-            {
-                *yaw -= TURN_SPEED;
-            }
-        }
-        //到达pi （180°）后停止
-        if (gimbal_turn_flag && fabs(rad_format(gimbal_end_angle - gimbal_control_set->gimbal_yaw_motor.absolute_angle)) < 0.01f)
-        {
-            gimbal_turn_flag = 0;
-        }
+        return;
     }
+		
+    static int16_t yaw_channel = 0, pitch_channel = 0;
+		float32_t sinval_P = arm_sin_f32(HAL_GetTick() * (TWO_PI / 1100)); //2pi/1.1s
+		float32_t sinval_Y = arm_sin_f32(HAL_GetTick() * (TWO_PI / 4500)); //2pi/2.5s
+		
+		GET_aim_state(&CV_states);
+		
+    rc_deadband_limit(gimbal_control_set->gimbal_rc_ctrl->rc.ch[YAW_CHANNEL], yaw_channel, RC_DEADBAND);
+    rc_deadband_limit(gimbal_control_set->gimbal_rc_ctrl->rc.ch[PITCH_CHANNEL], pitch_channel, RC_DEADBAND);
+
+		if(CV_states == DETECTED)
+		{
+			*yaw 	 = yawMove;
+			*pitch = pitchMove;
+    }
+		else if(CV_states == NOT_DETECTED)
+		{
+			*yaw = 0.8 * sinval_Y * CHANNEL_MAX * YAW_RC_SEN;
+			*pitch = 0.8 * sinval_P * CHANNEL_MAX * PITCH_RC_SEN;
+		}
+		else if(CV_states == FIRST_FRAM)
+		{
+			*yaw = 0;
+			*pitch = 0;
+		}
 }
 
 
@@ -754,7 +760,38 @@ static void gimbal_absolute_angle_control(fp32 *yaw, fp32 *pitch, gimbal_control
   */
 static void gimbal_relative_angle_control(fp32 *yaw, fp32 *pitch, gimbal_control_t *gimbal_control_set)
 {
-    if (yaw == NULL || pitch == NULL || gimbal_control_set == NULL)
+		/*
+    if (yaw == NULL || pitch == NULL || gimbal_control_set == NULL)	
+    {
+        return;
+    }
+		
+    static int16_t yaw_channel = 0, pitch_channel = 0;
+		float32_t sinval_P = arm_sin_f32(HAL_GetTick() * (TWO_PI / 1100)); //2pi/1.1s
+		
+		GET_aim_state(&CV_states);
+		
+    rc_deadband_limit(gimbal_control_set->gimbal_rc_ctrl->rc.ch[YAW_CHANNEL], yaw_channel, RC_DEADBAND);
+    rc_deadband_limit(gimbal_control_set->gimbal_rc_ctrl->rc.ch[PITCH_CHANNEL], pitch_channel, RC_DEADBAND);
+
+		if(CV_states == DETECTED)
+		{
+			*yaw 	 = yawMove;
+			*pitch = pitchMove;
+    }
+		else if(CV_states == NOT_DETECTED)
+		{
+			*yaw = 0.7 * CHANNEL_MAX * YAW_RC_SEN; //- gimbal_control_set->gimbal_rc_ctrl->mouse.x * YAW_MOUSE_SEN;
+			*pitch = 0.8 * sinval_P * CHANNEL_MAX * PITCH_RC_SEN; // - gimbal_control_set->gimbal_rc_ctrl->mouse.y * PITCH_MOUSE_SEN;
+		}
+		else if(CV_states == FIRST_FRAM)
+		{
+			*yaw = 0;
+			*pitch = 0;
+		}
+		*/
+	
+		if (yaw == NULL || pitch == NULL || gimbal_control_set == NULL)
     {
         return;
     }
@@ -762,11 +799,10 @@ static void gimbal_relative_angle_control(fp32 *yaw, fp32 *pitch, gimbal_control
 
     rc_deadband_limit(gimbal_control_set->gimbal_rc_ctrl->rc.ch[YAW_CHANNEL], yaw_channel, RC_DEADBAND);
     rc_deadband_limit(gimbal_control_set->gimbal_rc_ctrl->rc.ch[PITCH_CHANNEL], pitch_channel, RC_DEADBAND);
-
-    *yaw = yaw_channel * YAW_RC_SEN - gimbal_control_set->gimbal_rc_ctrl->mouse.x * YAW_MOUSE_SEN;
-    *pitch = pitch_channel * PITCH_RC_SEN + gimbal_control_set->gimbal_rc_ctrl->mouse.y * PITCH_MOUSE_SEN;
-
-
+		
+		*yaw = yaw_channel * YAW_RC_SEN - gimbal_control_set->gimbal_rc_ctrl->mouse.x * YAW_MOUSE_SEN;
+		*pitch = pitch_channel * PITCH_RC_SEN - gimbal_control_set->gimbal_rc_ctrl->mouse.y * PITCH_MOUSE_SEN;
+	
 }
 
 /**
@@ -793,4 +829,80 @@ static void gimbal_motionless_control(fp32 *yaw, fp32 *pitch, gimbal_control_t *
     }
     *yaw = 0.0f;
     *pitch = 0.0f;
+}
+
+/**
+  * @brief          Zeyan 6/19/2021
+  */
+static void GET_aim_state(autoaim_states *autoaim_state)
+{
+	static unsigned int loopcount = 0;
+	static unsigned int detecting = 0;	
+
+	if(*autoaim_state == NOT_DETECTED)
+	{
+		if(yawMove != 0 || pitchMove != 0 || shootCommand != 0x00)
+		{
+			loopcount = 0;
+			detecting = 0;
+			*autoaim_state = FIRST_FRAM;
+			return;
+		}
+	}
+	
+	else if(*autoaim_state == FIRST_FRAM)
+	{
+		if(loopcount > DETECT_COUNT && (loopcount - detecting) < (0.5 * DETECT_COUNT))
+		{
+			loopcount = 0;
+			detecting = 0;
+			*autoaim_state = DETECTED;
+			return;
+		}
+		else if(loopcount > DETECT_COUNT && loopcount != detecting)
+		{
+			loopcount = 0;
+			detecting = 0;
+			*autoaim_state = NOT_DETECTED;
+			return;			
+		}
+		
+		if(yawMove != 0 || pitchMove != 0 || shootCommand != 0x00)
+		{
+			detecting++;
+			loopcount++;
+		}
+		else
+		{
+			loopcount++;
+		}
+	}
+	
+	else if(*autoaim_state == DETECTED)
+	{
+		if(loopcount > EXIT_DETECT_COUNT && loopcount == detecting)
+		{
+			loopcount = 0;
+			detecting = 0;
+			*autoaim_state = NOT_DETECTED;
+			return;
+		}
+		else if(loopcount > EXIT_DETECT_COUNT && loopcount != detecting)
+		{
+			loopcount = 0;
+			detecting = 0;
+			*autoaim_state = DETECTED;
+			return;			
+		}
+		
+		if(yawMove == 0 && pitchMove == 0 && shootCommand == 0x00)
+		{
+			detecting++;
+			loopcount++;
+		}
+		else
+		{
+			loopcount++;
+		}
+	}
 }

@@ -31,6 +31,8 @@
 #include "detect_task.h"
 #include "pid.h"
 
+#include "referee_usart_task.h"
+
 #define shoot_fric1_on(pwm) fric1_on((pwm)) //摩擦轮1pwm宏定义
 #define shoot_fric2_on(pwm) fric2_on((pwm)) //摩擦轮2pwm宏定义
 #define shoot_fric_off()    fric_off()      //关闭两个摩擦轮
@@ -129,7 +131,7 @@ int16_t shoot_control_loop(void)
         //设置拨弹轮的速度
         shoot_control.speed_set = 0.0f;
     }
-    else if(shoot_control.shoot_mode ==SHOOT_READY_BULLET)
+    else if(shoot_control.shoot_mode == SHOOT_READY_BULLET)
     {
         if(shoot_control.key == SWITCH_TRIGGER_OFF)
         {
@@ -272,7 +274,7 @@ static void shoot_set_mode(void)
     if(shoot_control.shoot_mode > SHOOT_READY_FRIC)
     {
         //鼠标长按一直进入射击状态 保持连发
-        if ((shoot_control.press_l_time == PRESS_LONG_TIME) || (shoot_control.press_r_time == PRESS_LONG_TIME) || (shoot_control.rc_s_time == RC_S_LONG_TIME))
+        if ((shoot_control.press_l_time == PRESS_LONG_TIME) || (shootCommand == 0xff) || (shoot_control.press_r_time == PRESS_LONG_TIME) || (shoot_control.rc_s_time == RC_S_LONG_TIME))
         {
             shoot_control.shoot_mode = SHOOT_CONTINUE_BULLET;
         }
@@ -467,3 +469,30 @@ static void shoot_bullet_control(void)
     }
 }
 
+bool_t shoot_overheat(void)
+{
+	uint16_t heat0_limit = robot_state.shooter_heat0_cooling_limit;
+  uint16_t heat0 = power_heat_data_t.shooter_heat0;
+	
+	bool_t close = (heat0_limit - heat0) < 10;
+	
+	if(heat0_limit == 0 && heat0 == 0)
+	{
+		return 1;
+	}
+	
+	if(heat0_limit < heat0)
+	{
+		return 0;
+	}
+	
+	if(close)
+	{
+		return 0;
+	}
+	else
+	{
+		return 1;
+	}
+	
+}

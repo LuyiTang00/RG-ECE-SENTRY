@@ -83,6 +83,10 @@
 #include "struct_typedef.h"
 
 #include "gimbal_task.h"
+
+#define DETECT_COUNT 			10
+#define EXIT_DETECT_COUNT 75
+
 typedef enum
 {
   GIMBAL_ZERO_FORCE = 0, 
@@ -92,6 +96,13 @@ typedef enum
   GIMBAL_RELATIVE_ANGLE, 
   GIMBAL_MOTIONLESS,     
 } gimbal_behaviour_e;
+
+typedef enum
+{
+  NOT_DETECTED = 0,
+	FIRST_FRAM,
+	DETECTED
+} autoaim_states;
 
 /**
   * @brief          the function is called by gimbal_set_mode function in gimbal_task.c
@@ -148,5 +159,9 @@ extern bool_t gimbal_cmd_to_chassis_stop(void);
   * @retval         1: no move 0:normal
   */
 extern bool_t gimbal_cmd_to_shoot_stop(void);
+
+extern fp32 yawMove;
+extern fp32 pitchMove; 
+extern uint8_t shootCommand;
 
 #endif

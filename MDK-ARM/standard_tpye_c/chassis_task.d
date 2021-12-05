@@ -8,6 +8,7 @@ standard_tpye_c\chassis_task.o: ..\application\remote_control.h
 standard_tpye_c\chassis_task.o: ..\bsp\boards\bsp_rc.h
 standard_tpye_c\chassis_task.o: ..\components\algorithm\user_lib.h
 standard_tpye_c\chassis_task.o: ..\application\chassis_behaviour.h
+standard_tpye_c\chassis_task.o: ..\application\gimbal_behaviour.h
 standard_tpye_c\chassis_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 standard_tpye_c\chassis_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
 standard_tpye_c\chassis_task.o: D:\Program Files\KEIL\ARM\ARMCC\Bin\..\include\stddef.h
